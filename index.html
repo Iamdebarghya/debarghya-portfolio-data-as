@@ -6,76 +6,172 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Debarghya Hajra - Data Analyst specializing in SQL, Python, Power BI and business intelligence.">
 <title>Debarghya Hajra | Data Analyst</title>
+
 <style>
-:root{--bg:#090d0b;--panel:#111915;--green:#8be0ad;--text:#edf4ef;--muted:#9aa89e;--border:#25372c}
+:root {
+  --bg:#090d0b;
+  --panel:#111915;
+  --green:#8be0ad;
+  --text:#edf4ef;
+  --muted:#9aa89e;
+  --border:#25372c;
+}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif;line-height:1.7}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
+  line-height:1.7;
+}
 a{color:inherit;text-decoration:none}
 .container{width:min(1100px,90%);margin:auto}
-nav{position:sticky;top:0;z-index:10;background:rgba(9,13,11,.94);backdrop-filter:blur(15px);border-bottom:1px solid var(--border)}
-.nav-inner{min-height:75px;display:flex;justify-content:space-between;align-items:center;gap:20px}
+
+nav{
+  position:sticky;top:0;z-index:10;
+  background:rgba(9,13,11,.94);
+  backdrop-filter:blur(15px);
+  border-bottom:1px solid var(--border);
+}
+.nav-inner{
+  min-height:75px;display:flex;
+  justify-content:space-between;align-items:center;
+  gap:20px;
+}
 .logo{font-size:20px;font-weight:800}
 .logo span,.hero h1 span{color:var(--green)}
 .nav-links{display:flex;gap:25px;font-size:13px;color:var(--muted)}
 .nav-links a:hover{color:var(--green)}
-.hero{min-height:590px;display:flex;align-items:center;padding:85px 0;background:radial-gradient(ellipse at 80% 30%,#183324 0%,transparent 48%)}
-.eyebrow,.section-label{color:var(--green);font-size:12px;letter-spacing:3px;text-transform:uppercase}
+
+.hero{
+  min-height:590px;display:flex;
+  align-items:center;padding:85px 0;
+  background:radial-gradient(ellipse at 80% 30%,#183324 0%,transparent 48%);
+}
+.eyebrow,.section-label{
+  color:var(--green);font-size:12px;
+  letter-spacing:3px;text-transform:uppercase;
+}
 .eyebrow{margin-bottom:20px}
-.hero h1{font-size:clamp(43px,8vw,82px);line-height:1.08;letter-spacing:-3px;max-width:850px}
-.hero-desc{max-width:650px;color:var(--muted);margin:25px 0;font-size:17px}
+.hero h1{
+  font-size:clamp(43px,8vw,82px);
+  line-height:1.08;letter-spacing:-3px;
+  max-width:850px;
+}
+.hero-desc{
+  max-width:650px;color:var(--muted);
+  margin:25px 0;font-size:17px;
+}
 .buttons{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
-.btn{padding:12px 23px;border-radius:5px;border:1px solid var(--green);font-size:14px;font-weight:700;display:inline-block;transition:.2s}
+.btn{
+  padding:12px 23px;border-radius:5px;
+  border:1px solid var(--green);
+  font-size:14px;font-weight:700;
+  display:inline-block;transition:.2s;
+}
 .btn.primary{background:var(--green);color:#07110b}
 .btn:hover{transform:translateY(-3px)}
+
 .section{padding:85px 0}
-.section h2{font-size:clamp(30px,5vw,43px);margin:10px 0 30px;letter-spacing:-1px}
-.about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:start}
+.section h2{
+  font-size:clamp(30px,5vw,43px);
+  margin:10px 0 30px;letter-spacing:-1px;
+}
+.about-grid{
+  display:grid;grid-template-columns:1.4fr 1fr;
+  gap:40px;align-items:start;
+}
 .about-text{color:var(--muted);font-size:16px}
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.stat,.card{background:var(--panel);border:1px solid var(--border);border-radius:9px;padding:23px}
+.stat,.card{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:9px;padding:23px;
+}
 .stat strong{display:block;color:var(--green);font-size:27px}
 .stat span{font-size:12px;color:var(--muted)}
+
 .skills{display:flex;flex-wrap:wrap;gap:12px}
-.skill{border:1px solid var(--border);background:var(--panel);padding:10px 17px;border-radius:5px;font-size:13px}
+.skill{
+  border:1px solid var(--border);
+  background:var(--panel);
+  padding:10px 17px;border-radius:5px;font-size:13px;
+}
 .skill:hover{border-color:var(--green);color:var(--green)}
-.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+
+.cards{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:18px;
+}
 .card{transition:.25s}
 .card:hover{border-color:var(--green);transform:translateY(-4px)}
 .card-number{color:var(--green);font-size:12px}
 .card h3{font-size:20px;margin:12px 0}
 .card p{color:var(--muted);font-size:14px}
 .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
-.tag{font-size:11px;color:var(--green);background:#183023;padding:5px 9px;border-radius:3px}
-.featured{border-color:#527c61;background:linear-gradient(145deg,#14231a,#111915)}
-.project-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
-.project-links a{display:inline-block;border:1px solid var(--border);padding:8px 12px;border-radius:4px;font-size:12px;color:var(--green)}
-.project-links a:hover{border-color:var(--green);background:#183023}
+.tag{
+  font-size:11px;color:var(--green);
+  background:#183023;padding:5px 9px;border-radius:3px;
+}
+.featured{
+  border-color:#527c61;
+  background:linear-gradient(145deg,#14231a,#111915);
+}
+.project-links{
+  display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;
+}
+.project-links a{
+  display:inline-block;border:1px solid var(--border);
+  padding:8px 12px;border-radius:4px;
+  font-size:12px;color:var(--green);
+}
+.project-links a:hover{
+  border-color:var(--green);background:#183023;
+}
+
 .experience{border-left:1px solid var(--border);padding-left:27px}
 .timeline-item{position:relative;margin-bottom:38px}
-.timeline-item:before{content:"";position:absolute;left:-33px;top:9px;width:11px;height:11px;border-radius:50%;background:var(--green)}
+.timeline-item:before{
+  content:"";position:absolute;left:-33px;top:9px;
+  width:11px;height:11px;border-radius:50%;
+  background:var(--green);
+}
 .date{font-size:12px;color:var(--green);letter-spacing:1px}
 .timeline-item h3{font-size:20px;margin:6px 0}
 .timeline-item p,.timeline-item li{color:var(--muted);font-size:14px}
 .timeline-item ul{padding-left:18px;margin-top:10px}
+
 .education{display:grid;grid-template-columns:1fr 1fr;gap:15px}
-.contact-box{border:1px solid var(--border);background:linear-gradient(130deg,#14271c,#101713);padding:40px;border-radius:12px}
+.contact-box{
+  border:1px solid var(--border);
+  background:linear-gradient(130deg,#14271c,#101713);
+  padding:40px;border-radius:12px;
+}
 .contact-box p{color:var(--muted);margin:12px 0 24px}
 .contact-links{display:flex;flex-wrap:wrap;gap:20px}
 .contact-links a{color:var(--green);font-size:14px}
-footer{border-top:1px solid var(--border);padding:25px 0;text-align:center;color:var(--muted);font-size:12px}
-@media(max-width:700px){
-.nav-links{gap:12px;font-size:11px}
-.logo{font-size:17px}
-.hero{min-height:520px;padding:65px 0}
-.hero h1{letter-spacing:-2px}
-.about-grid,.cards,.education{grid-template-columns:1fr}
-.section{padding:65px 0}
-.contact-box{padding:25px}
+
+footer{
+  border-top:1px solid var(--border);
+  padding:25px 0;text-align:center;
+  color:var(--muted);font-size:12px;
 }
-@media(max-width:390px){.nav-links{gap:8px;font-size:10px}}
+
+@media(max-width:700px){
+  .nav-links{gap:12px;font-size:11px}
+  .logo{font-size:17px}
+  .hero{min-height:520px;padding:65px 0}
+  .hero h1{letter-spacing:-2px}
+  .about-grid,.cards,.education{grid-template-columns:1fr}
+  .section{padding:65px 0}
+  .contact-box{padding:25px}
+}
+@media(max-width:390px){
+  .nav-links{gap:8px;font-size:10px}
+}
 </style>
 </head>
+
 <body>
 
 <nav>
@@ -95,7 +191,12 @@ footer{border-top:1px solid var(--border);padding:25px 0;text-align:center;color
 <div class="container">
 <div class="eyebrow">Data Analytics / Business Intelligence</div>
 <h1>Turning data into <span>meaningful</span> decisions.</h1>
-<p class="hero-desc">I'm Debarghya Hajra, a Data Analyst with experience in SQL, Python, Power BI and Excel. I enjoy exploring data, identifying patterns and transforming business problems into actionable insights.</p>
+<p class="hero-desc">
+I'm Debarghya Hajra, a Data Analyst with experience in
+SQL, Python, Power BI and Excel. I enjoy exploring data,
+identifying patterns and transforming business problems
+into actionable insights.
+</p>
 <div class="buttons">
 <a class="btn primary" href="#projects">Explore My Work ↗</a>
 <a class="btn" href="#contact">Get In Touch</a>
@@ -109,8 +210,10 @@ footer{border-top:1px solid var(--border);padding:25px 0;text-align:center;color
 <h2>A little about me.</h2>
 <div class="about-grid">
 <div class="about-text">
-<p>I am a Data Analyst with 2+ years of professional experience in analytics, reporting and business intelligence.</p><br>
-<p>My professional journey includes working at Accenture and delivering analytics training at Boss Coder Academy. I work with structured datasets, develop dashboards, automate reports and communicate analytical findings.</p><br>
+<p>I am a Data Analyst with 2+ years of professional experience in analytics, reporting and business intelligence.</p>
+<br>
+<p>My professional journey includes working at Accenture and delivering analytics training at Boss Coder Academy. I work with structured datasets, develop dashboards, automate reports and communicate analytical findings.</p>
+<br>
 <p>I believe good analysis is not just about numbers. It is about asking the right questions and finding information that supports better decisions.</p>
 </div>
 <div class="stats">
@@ -155,7 +258,9 @@ footer{border-top:1px solid var(--border);padding:25px 0;text-align:center;color
 <article class="card featured">
 <div class="card-number">FEATURED CASE STUDY / 01 · BUSINESS INTELLIGENCE</div>
 <h3>India Online Sales Performance Analysis</h3>
-<p>Joined 1,500 order-detail rows with 500 order records from a public Kaggle dataset. Built an interactive browser-based dashboard to explore sales, recorded profit, product categories, payment modes and state-level performance. The source files are processed locally in the browser.</p>
+<p>
+Joined 1,500 order-detail rows with 500 order records from a public Kaggle dataset. Built an interactive browser-based dashboard to explore sales, recorded profit, product categories, payment modes and state-level performance. The source files are processed locally in the browser.
+</p>
 <div class="tags">
 <span class="tag">SQL</span>
 <span class="tag">Python</span>
@@ -164,7 +269,7 @@ footer{border-top:1px solid var(--border);padding:25px 0;text-align:center;color
 <span class="tag">Interactive Dashboard</span>
 </div>
 <div class="project-links">
-<a href="dashboard..html" target="_blank" rel="noopener">Open Live Dashboard ↗</a>
+<a href="dashboard.html" target="_blank" rel="noopener">Open Live Dashboard ↗</a>
 <a href="https://www.kaggle.com/datasets/samruddhi4040/online-sales-data" target="_blank" rel="noopener">Dataset Source ↗</a>
 <a href="https://github.com/lamdebarghya/debarghya-portfolio-data-as" target="_blank" rel="noopener">GitHub Repository ↗</a>
 </div>
@@ -173,29 +278,53 @@ footer{border-top:1px solid var(--border);padding:25px 0;text-align:center;color
 <article class="card">
 <div class="card-number">PROJECT 02 / BUSINESS INTELLIGENCE</div>
 <h3>Sales Data Analysis & Executive Dashboard</h3>
-<p>Analysed sales records to identify business performance trends, key metrics and insights. Developed an executive Power BI dashboard for KPI tracking and performance monitoring.</p>
-<div class="tags"><span class="tag">SQL</span><span class="tag">Power BI</span><span class="tag">Data Analysis</span></div>
+<p>
+Analysed sales records to identify business performance trends, key metrics and insights. Developed an executive Power BI dashboard for KPI tracking and performance monitoring.
+</p>
+<div class="tags">
+<span class="tag">SQL</span>
+<span class="tag">Power BI</span>
+<span class="tag">Data Analysis</span>
+</div>
 </article>
 
 <article class="card">
 <div class="card-number">PROJECT 03 / MACHINE LEARNING</div>
 <h3>Customer Churn Prediction</h3>
-<p>Explored customer behaviour and churn patterns. Performed data preprocessing and developed machine learning models to identify customers at risk of leaving.</p>
-<div class="tags"><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Machine Learning</span></div>
+<p>
+Explored customer behaviour and churn patterns. Performed data preprocessing and developed machine learning models to identify customers at risk of leaving.
+</p>
+<div class="tags">
+<span class="tag">Python</span>
+<span class="tag">Pandas</span>
+<span class="tag">Machine Learning</span>
+</div>
 </article>
 
 <article class="card">
 <div class="card-number">PROJECT 04 / DATA ENGINEERING</div>
 <h3>LinkedIn Data Scraping & Analysis</h3>
-<p>Developed a Python-based data extraction workflow to collect structured job and company information. Stored structured results in SQL for further analysis.</p>
-<div class="tags"><span class="tag">Python</span><span class="tag">Selenium</span><span class="tag">SQL</span></div>
+<p>
+Developed a Python-based data extraction workflow to collect structured job and company information. Stored structured results in SQL for further analysis.
+</p>
+<div class="tags">
+<span class="tag">Python</span>
+<span class="tag">Selenium</span>
+<span class="tag">SQL</span>
+</div>
 </article>
 
 <article class="card">
 <div class="card-number">PROJECT 05 / ANALYTICS PRODUCTIVITY</div>
 <h3>Generative AI for Analytics</h3>
-<p>Applied Generative AI tools to support report drafting, data analysis, summarization and analytical productivity.</p>
-<div class="tags"><span class="tag">ChatGPT</span><span class="tag">Data Analytics</span><span class="tag">AI Tools</span></div>
+<p>
+Applied Generative AI tools to support report drafting, data analysis, summarization and analytical productivity.
+</p>
+<div class="tags">
+<span class="tag">ChatGPT</span>
+<span class="tag">Data Analytics</span>
+<span class="tag">AI Tools</span>
+</div>
 </article>
 
 </div>
@@ -239,8 +368,16 @@ footer{border-top:1px solid var(--border);padding:25px 0;text-align:center;color
 <div class="section-label">05 / Education</div>
 <h2>Academic background.</h2>
 <div class="education">
-<div class="card"><div class="date">2022 — 2024</div><h3>Master of Computer Applications</h3><p>Manipal Academy of Higher Education</p></div>
-<div class="card"><div class="date">2018 — 2021</div><h3>Bachelor of Computer Applications</h3><p>University of Burdwan</p></div>
+<div class="card">
+<div class="date">2022 — 2024</div>
+<h3>Master of Computer Applications</h3>
+<p>Manipal Academy of Higher Education</p>
+</div>
+<div class="card">
+<div class="date">2018 — 2021</div>
+<h3>Bachelor of Computer Applications</h3>
+<p>University of Burdwan</p>
+</div>
 </div>
 <br>
 <div class="card">
