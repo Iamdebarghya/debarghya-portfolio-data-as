@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>India Online Sales | Analytics Case Study</title>
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+:root{--bg:#101412;--panel:#171e1a;--panel2:#1c2520;--line:#2a3730;--text:#edf3ed;--muted:#9aa99f;--green:#a7d7b2;--lime:#d6e9a7;--red:#e6a39a}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}
+.wrap{max-width:1220px;margin:auto;padding:30px 22px 60px}.top{display:flex;justify-content:space-between;gap:20px;align-items:center;border-bottom:1px solid var(--line);padding-bottom:20px}
+.brand{font-size:12px;letter-spacing:.18em;color:var(--green);text-transform:uppercase}.tag{font-size:12px;color:var(--muted);border:1px solid var(--line);padding:7px 11px;border-radius:20px}
+h1{font-size:clamp(32px,5vw,56px);line-height:1.05;letter-spacing:-.045em;font-weight:550;margin:34px 0 12px;max-width:760px}
+.sub{color:var(--muted);max-width:700px;margin:0 0 28px}.accent{color:var(--green)}
+.upload{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;margin:24px 0;display:grid;grid-template-columns:1fr 1fr auto;gap:14px;align-items:end}
+label{display:block;font-size:12px;color:var(--muted);margin-bottom:7px}.file{width:100%;color:var(--muted);font-size:13px}
+button{background:var(--green);color:#102016;border:0;border-radius:8px;padding:12px 18px;font-weight:650;cursor:pointer}button:disabled{opacity:.45;cursor:not-allowed}
+.status{font-size:12px;color:var(--muted);grid-column:1/-1}.status.error{color:var(--red)}.status.ok{color:var(--green)}
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}select{background:var(--panel);color:var(--text);border:1px solid var(--line);padding:10px 12px;border-radius:8px;min-width:150px}
+.sectionhead{display:flex;justify-content:space-between;align-items:end;margin:32px 0 14px}.sectionhead h2{font-size:18px;font-weight:550;margin:0}.sectionhead span{font-size:12px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.card,.chartbox,.insights,.tablebox{background:var(--panel);border:1px solid var(--line);border-radius:13px}
+.card{padding:17px}.klabel{font-size:12px;color:var(--muted)}.kvalue{font-size:clamp(23px,3vw,32px);letter-spacing:-.04em;margin-top:7px}.kfoot{font-size:11px;color:var(--muted);margin-top:5px}
+.charts{display:grid;grid-template-columns:1.3fr 1fr;gap:12px}.chartbox{padding:18px;min-height:310px}.charttitle{font-size:14px;margin-bottom:14px}.canvaswrap{height:245px;position:relative}
+.lower{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}.insights,.tablebox{padding:18px}.insights ul{padding-left:18px;margin:12px 0;color:#cbd5cd}.insights li{margin:8px 0}.tablewrap{overflow:auto;max-height:310px}table{width:100%;border-collapse:collapse;font-size:12px}th,td{text-align:left;padding:10px;border-bottom:1px solid var(--line);white-space:nowrap}th{color:var(--muted);font-weight:500;position:sticky;top:0;background:var(--panel)}
+.empty{padding:55px 20px;text-align:center;border:1px dashed var(--line);border-radius:13px;color:var(--muted);margin-top:18px}.empty strong{display:block;color:var(--text);font-size:17px;margin-bottom:8px}
+.foot{border-top:1px solid var(--line);margin-top:36px;padding-top:16px;color:var(--muted);font-size:11px}
+@media(max-width:760px){.wrap{padding:20px 14px 40px}.upload{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,1fr)}.charts,.lower{grid-template-columns:1fr}.chartbox{min-height:285px}.canvaswrap{height:220px}.top{align-items:flex-start;flex-direction:column}}
+</style></head>
+<body><main class="wrap">
+<header class="top"><div class="brand">DEBARGHYA HAJRA · DATA ANALYTICS</div><div class="tag">PORTFOLIO CASE STUDY / 01</div></header>
+<h1>India Online Sales<br><span class="accent">Performance, decoded.</span></h1>
+<p class="sub">An interactive analysis of order value, profitability, product mix and regional performance. Load the original Kaggle CSV files to explore the data. All calculations run locally in your browser.</p>
+<section class="upload">
+<div><label for="details">01 · Order details CSV</label><input class="file" id="details" type="file" accept=".csv"></div>
+<div><label for="orders">02 · Orders CSV</label><input class="file" id="orders" type="file" accept=".csv"></div>
+<div><button id="load" disabled>Build dashboard ↗</button></div>
+<div id="status" class="status">Choose Details.csv and Orders.csv. The files are processed on your device and are not uploaded to a server.</div>
+</section>
+<div id="dashboard" hidden>
+<div class="filters">
+<select id="stateFilter"><option value="">All states</option></select>
+<select id="categoryFilter"><option value="">All categories</option></select>
+<select id="paymentFilter"><option value="">All payment modes</option></select>
+</div>
+<div class="sectionhead"><h2>Performance overview</h2><span id="rowCount">0 records</span></div>
+<div class="grid">
+<div class="card"><div class="klabel">Gross sales</div><div class="kvalue" id="sales">₹0</div><div class="kfoot">Sum of order line amounts</div></div>
+<div class="card"><div class="klabel">Total profit</div><div class="kvalue" id="profit">₹0</div><div class="kfoot">Sum of recorded profit</div></div>
+<div class="card"><div class="klabel">Units sold</div><div class="kvalue" id="units">0</div><div class="kfoot">Total quantity</div></div>
+<div class="card"><div class="klabel">Profit margin</div><div class="kvalue" id="margin">0%</div><div class="kfoot">Profit ÷ sales</div></div>
+</div>
+<div class="sectionhead"><h2>Sales patterns</h2><span>Filtered view</span></div>
+<div class="charts">
+<div class="chartbox"><div class="charttitle">Monthly sales trend</div><div class="canvaswrap"><canvas id="monthly"></canvas></div></div>
+<div class="chartbox"><div class="charttitle">Sales by product category</div><div class="canvaswrap"><canvas id="category"></canvas></div></div>
+<div class="chartbox"><div class="charttitle">Profit by state · Top 8</div><div class="canvaswrap"><canvas id="state"></canvas></div></div>
+<div class="chartbox"><div class="charttitle">Sales by payment mode</div><div class="canvaswrap"><canvas id="payment"></canvas></div></div>
+</div>
+<div class="lower">
+<div class="insights"><div class="charttitle">Business observations</div><ul id="insights"><li>Upload the dataset to generate observations.</li></ul></div>
+<div class="tablebox"><div class="charttitle">Top 10 sub-categories by sales</div><div class="tablewrap"><table><thead><tr><th>Sub-category</th><th>Sales</th><th>Profit</th></tr></thead><tbody id="topTable"></tbody></table></div></div>
+</div></div>
+<div id="empty" class="empty"><strong>Start with the source data</strong>Upload the two CSV files from the Kaggle dataset to generate the dashboard. No demo figures or invented business results are shown.</div>
+<footer class="foot">DATA SOURCE · Kaggle, “Online Sales Data” by samruddhi4040. Historical dataset. Results are descriptive, not a forecast. Revenue and profit definitions follow the fields supplied in the source files. Built by Debarghya Hajra.</footer>
+</main>
+<script>
+let joined=[], charts={};
+const $=id=>document.getElementById(id);
+const norm=s=>String(s??'').toLowerCase().replace(/[^a-z0-9]/g,'');
+function pick(row,names){const keys=Object.keys(row);for(const n of names){const k=keys.find(x=>norm(x)===norm(n));if(k!==undefined)return row[k]}return ''}
+function num(v){if(typeof v==='number')return v;return Number(String(v??'').replace(/[₹,$,\s]/g,'').replace(/,/g,''))||0}
+function money(v){return '₹'+Math.round(v).toLocaleString('en-IN')}
+function parseFile(file){return new Promise((resolve,reject)=>Papa.parse(file,{header:true,skipEmptyLines:true,dynamicTyping:false,complete:r=>resolve(r.data),error:reject}))}
+function groupSum(rows,key,val){const m={};rows.forEach(r=>{let k=String(r[key]||'Unknown');m[k]=(m[k]||0)+num(r[val])});return Object.entries(m).sort((a,b)=>b[1]-a[1])}
+function makeChart(id,type,labels,values,horizontal=false){if(charts[id])charts[id].destroy();charts[id]=new Chart($(id),{type,data:{labels,datasets:[{data:values,backgroundColor:type==='line'?'rgba(167,215,178,.16)':['#a7d7b2','#d6e9a7','#739b83','#527663','#b9c9a1','#879b8e','#d2b88c','#6c8b9b'],borderColor:'#a7d7b2',borderWidth:1.5,fill:type==='line',tension:.32,borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:horizontal?'y':'x',plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#9aa99f'},grid:{color:'#2a3730'}},y:{ticks:{color:'#9aa99f'},grid:{color:'#2a3730'}}}}})}
+function fillSelect(id,field){const el=$(id),old=el.value,vals=[...new Set(joined.map(r=>r[field]).filter(Boolean))].sort();el.innerHTML='<option value="">All '+(field==='state'?'states':field==='category'?'categories':'payment modes')+'</option>'+vals.map(v=>`<option>${String(v).replace(/[&<>"]/g,'')}</option>`).join('');if(vals.includes(old))el.value=old}
+function filtered(){return joined.filter(r=>(!$('stateFilter').value||r.state===$('stateFilter').value)&&(!$('categoryFilter').value||r.category===$('categoryFilter').value)&&(!$('paymentFilter').value||r.payment===$('paymentFilter').value))}
+function render(){
+ const rows=filtered(),sales=rows.reduce((a,r)=>a+r.amount,0),profit=rows.reduce((a,r)=>a+r.profit,0),units=rows.reduce((a,r)=>a+r.qty,0);
+ $('sales').textContent=money(sales);$('profit').textContent=money(profit);$('units').textContent=units.toLocaleString('en-IN');$('margin').textContent=(sales?profit/sales*100:0).toFixed(1)+'%';$('rowCount').textContent=rows.length.toLocaleString('en-IN')+' order lines';
+ const months={};rows.forEach(r=>{let d=r.date?new Date(r.date):null;if(d&&!isNaN(d)){let k=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');months[k]=(months[k]||0)+r.amount}});
+ const m=Object.entries(months).sort((a,b)=>a[0].localeCompare(b[0]));makeChart('monthly','line',m.map(x=>x[0]),m.map(x=>x[1]));
+ const cats=groupSum(rows,'category','amount').slice(0,8);makeChart('category','doughnut',cats.map(x=>x[0]),cats.map(x=>x[1]));
+ const states=groupSum(rows,'state','profit').slice(0,8).reverse();makeChart('state','bar',states.map(x=>x[0]),states.map(x=>x[1]),true);
+ const pays=groupSum(rows,'payment','amount');makeChart('payment','bar',pays.map(x=>x[0]),pays.map(x=>x[1]));
+ const subs={};rows.forEach(r=>{let k=r.subcategory||'Unknown';if(!subs[k])subs[k]={sales:0,profit:0};subs[k].sales+=r.amount;subs[k].profit+=r.profit});
+ $('topTable').innerHTML=Object.entries(subs).sort((a,b)=>b[1].sales-a[1].sales).slice(0,10).map(([k,v])=>`<tr><td>${k}</td><td>${money(v.sales)}</td><td>${money(v.profit)}</td></tr>`).join('');
+ const topCat=groupSum(rows,'category','amount')[0],topState=groupSum(rows,'state','amount')[0],bestPay=groupSum(rows,'payment','amount')[0],loss=rows.filter(r=>r.profit<0).length;
+ const notes=[];if(topCat)notes.push(`${topCat[0]} is the highest sales category in the current selection (${money(topCat[1])}).`);if(topState)notes.push(`${topState[0]} contributes the highest sales among states in the current selection.`);if(bestPay)notes.push(`${bestPay[0]} is the leading payment mode by sales.`);notes.push(`${loss.toLocaleString('en-IN')} order lines have negative recorded profit.`);notes.push(`Overall profit margin for this selection is ${(sales?profit/sales*100:0).toFixed(1)}%.`);
+ $('insights').innerHTML=notes.map(n=>'<li>'+n+'</li>').join('');
+}
+async function load(){
+ const d=$('details').files[0],o=$('orders').files[0];if(!d||!o)return;
+ $('status').className='status';$('status').textContent='Reading and joining CSV files…';
+ try{
+ const [details,orders]=await Promise.all([parseFile(d),parseFile(o)]);
+ const orderMap=new Map();orders.forEach(r=>{const id=String(pick(r,['Order ID','Order_ID','OrderID'])).trim();if(id)orderMap.set(id,r)});
+ joined=details.map(r=>{const id=String(pick(r,['Order ID','Order_ID','OrderID'])).trim(),ord=orderMap.get(id)||{};
+ const date=pick(ord,['Order Date','Date','OrderDate']);return {id,amount:num(pick(r,['Amount','Sales','Order Value'])),profit:num(pick(r,['Profit'])),qty:num(pick(r,['Quantity','Qty'])),category:String(pick(r,['Category','Product Category'])||'Unknown'),subcategory:String(pick(r,['Sub-Category','Sub Category','Subcategory'])||'Unknown'),payment:String(pick(r,['PaymentMode','Payment Mode','Payment Method'])||'Unknown'),state:String(pick(ord,['State','state'])||'Unknown'),date:String(date||'')}});
+ joined=joined.filter(r=>r.id&&Number.isFinite(r.amount));
+ if(!joined.length)throw new Error('No matching rows found. Please check that you selected the original Details.csv and Orders.csv files.');
+ fillSelect('stateFilter','state');fillSelect('categoryFilter','category');fillSelect('paymentFilter','payment');
+ $('dashboard').hidden=false;$('empty').hidden=true;render();
+ $('status').className='status ok';$('status').textContent=`Dashboard ready. ${joined.length.toLocaleString('en-IN')} detail rows loaded. ${details.length-joined.length} rows could not be matched or did not contain a valid order ID/amount.`;
+ }catch(e){$('status').className='status error';$('status').textContent='Could not build dashboard: '+e.message}
+}
+['details','orders'].forEach(id=>$(id).addEventListener('change',()=>{$('load').disabled=!($('details').files.length&&$('orders').files.length)}));
+$('load').addEventListener('click',load);['stateFilter','categoryFilter','paymentFilter'].forEach(id=>$(id).addEventListener('change',render));
+</script></body></html>
