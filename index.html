@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,407 +8,876 @@
 
 <style>
 :root {
-  --bg:#090d0b;
-  --panel:#111915;
-  --green:#8be0ad;
-  --text:#edf4ef;
-  --muted:#9aa89e;
-  --border:#25372c;
-}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  background:var(--bg);
-  color:var(--text);
-  font-family:Arial,Helvetica,sans-serif;
-  line-height:1.7;
-}
-a{color:inherit;text-decoration:none}
-.container{width:min(1100px,90%);margin:auto}
-
-nav{
-  position:sticky;top:0;z-index:10;
-  background:rgba(9,13,11,.94);
-  backdrop-filter:blur(15px);
-  border-bottom:1px solid var(--border);
-}
-.nav-inner{
-  min-height:75px;display:flex;
-  justify-content:space-between;align-items:center;
-  gap:20px;
-}
-.logo{font-size:20px;font-weight:800}
-.logo span,.hero h1 span{color:var(--green)}
-.nav-links{display:flex;gap:25px;font-size:13px;color:var(--muted)}
-.nav-links a:hover{color:var(--green)}
-
-.hero{
-  min-height:590px;display:flex;
-  align-items:center;padding:85px 0;
-  background:radial-gradient(ellipse at 80% 30%,#183324 0%,transparent 48%);
-}
-.eyebrow,.section-label{
-  color:var(--green);font-size:12px;
-  letter-spacing:3px;text-transform:uppercase;
-}
-.eyebrow{margin-bottom:20px}
-.hero h1{
-  font-size:clamp(43px,8vw,82px);
-  line-height:1.08;letter-spacing:-3px;
-  max-width:850px;
-}
-.hero-desc{
-  max-width:650px;color:var(--muted);
-  margin:25px 0;font-size:17px;
-}
-.buttons{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
-.btn{
-  padding:12px 23px;border-radius:5px;
-  border:1px solid var(--green);
-  font-size:14px;font-weight:700;
-  display:inline-block;transition:.2s;
-}
-.btn.primary{background:var(--green);color:#07110b}
-.btn:hover{transform:translateY(-3px)}
-
-.section{padding:85px 0}
-.section h2{
-  font-size:clamp(30px,5vw,43px);
-  margin:10px 0 30px;letter-spacing:-1px;
-}
-.about-grid{
-  display:grid;grid-template-columns:1.4fr 1fr;
-  gap:40px;align-items:start;
-}
-.about-text{color:var(--muted);font-size:16px}
-.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.stat,.card{
-  background:var(--panel);
-  border:1px solid var(--border);
-  border-radius:9px;padding:23px;
-}
-.stat strong{display:block;color:var(--green);font-size:27px}
-.stat span{font-size:12px;color:var(--muted)}
-
-.skills{display:flex;flex-wrap:wrap;gap:12px}
-.skill{
-  border:1px solid var(--border);
-  background:var(--panel);
-  padding:10px 17px;border-radius:5px;font-size:13px;
-}
-.skill:hover{border-color:var(--green);color:var(--green)}
-
-.cards{
-  display:grid;grid-template-columns:repeat(2,1fr);
-  gap:18px;
-}
-.card{transition:.25s}
-.card:hover{border-color:var(--green);transform:translateY(-4px)}
-.card-number{color:var(--green);font-size:12px}
-.card h3{font-size:20px;margin:12px 0}
-.card p{color:var(--muted);font-size:14px}
-.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
-.tag{
-  font-size:11px;color:var(--green);
-  background:#183023;padding:5px 9px;border-radius:3px;
-}
-.featured{
-  border-color:#527c61;
-  background:linear-gradient(145deg,#14231a,#111915);
-}
-.project-links{
-  display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;
-}
-.project-links a{
-  display:inline-block;border:1px solid var(--border);
-  padding:8px 12px;border-radius:4px;
-  font-size:12px;color:var(--green);
-}
-.project-links a:hover{
-  border-color:var(--green);background:#183023;
+  --bg: #090e0b;
+  --panel: #111a15;
+  --green: #9be2b5;
+  --text: #edf4ef;
+  --muted: #a0ada4;
+  --border: #293a30;
 }
 
-.experience{border-left:1px solid var(--border);padding-left:27px}
-.timeline-item{position:relative;margin-bottom:38px}
-.timeline-item:before{
-  content:"";position:absolute;left:-33px;top:9px;
-  width:11px;height:11px;border-radius:50%;
-  background:var(--green);
-}
-.date{font-size:12px;color:var(--green);letter-spacing:1px}
-.timeline-item h3{font-size:20px;margin:6px 0}
-.timeline-item p,.timeline-item li{color:var(--muted);font-size:14px}
-.timeline-item ul{padding-left:18px;margin-top:10px}
-
-.education{display:grid;grid-template-columns:1fr 1fr;gap:15px}
-.contact-box{
-  border:1px solid var(--border);
-  background:linear-gradient(130deg,#14271c,#101713);
-  padding:40px;border-radius:12px;
-}
-.contact-box p{color:var(--muted);margin:12px 0 24px}
-.contact-links{display:flex;flex-wrap:wrap;gap:20px}
-.contact-links a{color:var(--green);font-size:14px}
-
-footer{
-  border-top:1px solid var(--border);
-  padding:25px 0;text-align:center;
-  color:var(--muted);font-size:12px;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@media(max-width:700px){
-  .nav-links{gap:12px;font-size:11px}
-  .logo{font-size:17px}
-  .hero{min-height:520px;padding:65px 0}
-  .hero h1{letter-spacing:-2px}
-  .about-grid,.cards,.education{grid-template-columns:1fr}
-  .section{padding:65px 0}
-  .contact-box{padding:25px}
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
 }
-@media(max-width:390px){
-  .nav-links{gap:8px;font-size:10px}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.7;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  width: min(1120px, 90%);
+  margin: auto;
+}
+
+/* NAVIGATION */
+
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(9,14,11,.96);
+  backdrop-filter: blur(15px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-inner {
+  min-height: 76px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.logo span {
+  color: var(--green);
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.nav-links a:hover {
+  color: var(--green);
+}
+
+/* HERO */
+
+.hero {
+  min-height: 590px;
+  display: flex;
+  align-items: center;
+  padding: 90px 0;
+  background: radial-gradient(
+    ellipse at 80% 30%,
+    #1a3927 0%,
+    transparent 50%
+  );
+}
+
+.eyebrow,
+.section-label {
+  color: var(--green);
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  font-size: clamp(44px, 8vw, 82px);
+  line-height: 1.08;
+  letter-spacing: -3px;
+  max-width: 900px;
+  margin-top: 22px;
+}
+
+.hero h1 span {
+  color: var(--green);
+}
+
+.hero-desc {
+  max-width: 650px;
+  color: var(--muted);
+  margin: 25px 0;
+  font-size: 17px;
+}
+
+.buttons {
+  display: flex;
+  gap: 13px;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 21px;
+  border: 1px solid var(--green);
+  border-radius: 5px;
+  font-size: 13px;
+  font-weight: 700;
+  transition: .2s;
+}
+
+.btn.primary {
+  background: var(--green);
+  color: #07120b;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+}
+
+.btn.secondary {
+  border-color: var(--border);
+}
+
+/* SECTIONS */
+
+.section {
+  padding: 85px 0;
+}
+
+.section h2 {
+  font-size: clamp(30px, 5vw, 44px);
+  margin: 10px 0 30px;
+  letter-spacing: -1px;
+}
+
+/* ABOUT */
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 40px;
+}
+
+.about-text {
+  color: var(--muted);
+  font-size: 16px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.stat,
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 24px;
+}
+
+.stat strong {
+  display: block;
+  color: var(--green);
+  font-size: 28px;
+}
+
+.stat span {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* SKILLS */
+
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.skill {
+  border: 1px solid var(--border);
+  background: var(--panel);
+  padding: 10px 17px;
+  border-radius: 5px;
+  font-size: 13px;
+}
+
+.skill:hover {
+  border-color: var(--green);
+  color: var(--green);
+}
+
+/* PROJECTS */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.card {
+  transition: .25s;
+}
+
+.card:hover {
+  border-color: var(--green);
+  transform: translateY(-3px);
+}
+
+.card-number {
+  color: var(--green);
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+.card h3 {
+  font-size: 21px;
+  margin: 13px 0;
+}
+
+.card p {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.tag {
+  font-size: 11px;
+  color: var(--green);
+  background: #193326;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.project-link {
+  display: inline-block;
+  padding: 9px 12px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  color: var(--green);
+  font-size: 12px;
+}
+
+.project-link:hover {
+  background: #193326;
+  border-color: var(--green);
+}
+
+.featured {
+  border-color: #52775e;
+  background: linear-gradient(140deg,#14251b,#111a15);
+}
+
+/* EXPERIENCE */
+
+.experience {
+  border-left: 1px solid var(--border);
+  padding-left: 27px;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 38px;
+}
+
+.timeline-item:before {
+  content: "";
+  position: absolute;
+  left: -33px;
+  top: 9px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--green);
+}
+
+.date {
+  font-size: 12px;
+  color: var(--green);
+  letter-spacing: 1px;
+}
+
+.timeline-item h3 {
+  font-size: 20px;
+  margin: 6px 0;
+}
+
+.timeline-item p,
+.timeline-item li {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.timeline-item ul {
+  padding-left: 18px;
+  margin-top: 10px;
+}
+
+/* EDUCATION */
+
+.education {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+/* CONTACT */
+
+.contact-box {
+  border: 1px solid var(--border);
+  background: linear-gradient(130deg,#14271c,#101713);
+  padding: 40px;
+  border-radius: 12px;
+}
+
+.contact-box p {
+  color: var(--muted);
+  margin: 12px 0 24px;
+}
+
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.contact-links a {
+  color: var(--green);
+  font-size: 14px;
+}
+
+/* FOOTER */
+
+footer {
+  border-top: 1px solid var(--border);
+  padding: 25px 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* MOBILE RESPONSIVE */
+
+@media(max-width:700px) {
+  .nav-inner {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 14px 0;
+  }
+
+  .nav-links {
+    width: 100%;
+    gap: 15px;
+    overflow-x: auto;
+    padding-bottom: 5px;
+    font-size: 12px;
+  }
+
+  .hero {
+    min-height: 520px;
+    padding: 65px 0;
+  }
+
+  .hero h1 {
+    letter-spacing: -2px;
+  }
+
+  .about-grid,
+  .cards,
+  .education {
+    grid-template-columns: 1fr;
+  }
+
+  .section {
+    padding: 65px 0;
+  }
+
+  .contact-box {
+    padding: 25px;
+  }
 }
 </style>
 </head>
 
 <body>
 
+<!-- NAVIGATION -->
+
 <nav>
-<div class="container nav-inner">
-<a href="#home" class="logo">DEB<span>.</span>HAJRA</a>
-<div class="nav-links">
-<a href="#about">About</a>
-<a href="#skills">Skills</a>
-<a href="#projects">Projects</a>
-<a href="#experience">Experience</a>
-<a href="#contact">Contact</a>
-</div>
-</div>
+  <div class="container nav-inner">
+
+    <a href="#home" class="logo">
+      DEB<span>.</span>HAJRA
+    </a>
+
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </div>
+
+  </div>
 </nav>
 
+<!-- HERO -->
+
 <header class="hero" id="home">
-<div class="container">
-<div class="eyebrow">Data Analytics / Business Intelligence</div>
-<h1>Turning data into <span>meaningful</span> decisions.</h1>
-<p class="hero-desc">
-I'm Debarghya Hajra, a Data Analyst with experience in
-SQL, Python, Power BI and Excel. I enjoy exploring data,
-identifying patterns and transforming business problems
-into actionable insights.
-</p>
-<div class="buttons">
-<a class="btn primary" href="#projects">Explore My Work ↗</a>
-<a class="btn" href="#contact">Get In Touch</a>
-</div>
-</div>
+
+  <div class="container">
+
+    <div class="eyebrow">
+      Data Analytics / Business Intelligence
+    </div>
+
+    <h1>
+      Turning data into
+      <span>meaningful</span> decisions.
+    </h1>
+
+    <p class="hero-desc">
+      I'm Debarghya Hajra, a Data Analyst working with SQL,
+      Python, Power BI and Excel. I enjoy exploring datasets,
+      identifying patterns and translating business questions
+      into clear, useful analysis.
+    </p>
+
+    <div class="buttons">
+      <a class="btn primary" href="#projects">
+        Explore My Work ↗
+      </a>
+
+      <a class="btn secondary" href="#contact">
+        Get In Touch
+      </a>
+    </div>
+
+  </div>
+
 </header>
 
+<!-- ABOUT -->
+
 <section class="section" id="about">
-<div class="container">
-<div class="section-label">01 / About</div>
-<h2>A little about me.</h2>
-<div class="about-grid">
-<div class="about-text">
-<p>I am a Data Analyst with 2+ years of professional experience in analytics, reporting and business intelligence.</p>
-<br>
-<p>My professional journey includes working at Accenture and delivering analytics training at Boss Coder Academy. I work with structured datasets, develop dashboards, automate reports and communicate analytical findings.</p>
-<br>
-<p>I believe good analysis is not just about numbers. It is about asking the right questions and finding information that supports better decisions.</p>
-</div>
-<div class="stats">
-<div class="stat"><strong>2+</strong><span>Years of experience</span></div>
-<div class="stat"><strong>4+</strong><span>Core analytics tools</span></div>
-<div class="stat"><strong>1,500</strong><span>Sales detail rows in featured case study</span></div>
-<div class="stat"><strong>4+</strong><span>Featured projects</span></div>
-</div>
-</div>
-</div>
+
+  <div class="container">
+
+    <div class="section-label">01 / About</div>
+
+    <h2>A little about me.</h2>
+
+    <div class="about-grid">
+
+      <div class="about-text">
+
+        <p>
+          I am a Data Analyst with experience in analytics,
+          reporting and business intelligence.
+        </p>
+
+        <br>
+
+        <p>
+          My professional journey includes working at Accenture
+          and delivering analytics training at Boss Coder Academy.
+          I work with structured datasets, develop dashboards,
+          automate reports and communicate analytical findings.
+        </p>
+
+        <br>
+
+        <p>
+          I believe good analysis is not just about numbers.
+          It is about asking the right questions and finding
+          information that supports better decisions.
+        </p>
+
+      </div>
+
+      <div class="stats">
+
+        <div class="stat">
+          <strong>2+</strong>
+          <span>Years of experience</span>
+        </div>
+
+        <div class="stat">
+          <strong>SQL</strong>
+          <span>Querying & analysis</span>
+        </div>
+
+        <div class="stat">
+          <strong>Power BI</strong>
+          <span>Business reporting</span>
+        </div>
+
+        <div class="stat">
+          <strong>Python</strong>
+          <span>Data analysis</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
 </section>
+
+<!-- SKILLS -->
 
 <section class="section" id="skills">
-<div class="container">
-<div class="section-label">02 / Expertise</div>
-<h2>Tools I work with.</h2>
-<div class="skills">
-<span class="skill">SQL</span>
-<span class="skill">Python</span>
-<span class="skill">Pandas</span>
-<span class="skill">NumPy</span>
-<span class="skill">Power BI</span>
-<span class="skill">Microsoft Excel</span>
-<span class="skill">Power Query</span>
-<span class="skill">ETL Workflows</span>
-<span class="skill">Data Cleaning</span>
-<span class="skill">Data Visualization</span>
-<span class="skill">Exploratory Data Analysis</span>
-<span class="skill">KPI Reporting</span>
-<span class="skill">Git</span>
-<span class="skill">Selenium</span>
-</div>
-</div>
+
+  <div class="container">
+
+    <div class="section-label">02 / Expertise</div>
+
+    <h2>Tools I work with.</h2>
+
+    <div class="skills">
+
+      <span class="skill">SQL</span>
+      <span class="skill">Python</span>
+      <span class="skill">Pandas</span>
+      <span class="skill">NumPy</span>
+      <span class="skill">Power BI</span>
+      <span class="skill">Microsoft Excel</span>
+      <span class="skill">Power Query</span>
+      <span class="skill">ETL Workflows</span>
+      <span class="skill">Data Cleaning</span>
+      <span class="skill">Data Visualization</span>
+      <span class="skill">Exploratory Data Analysis</span>
+      <span class="skill">KPI Reporting</span>
+      <span class="skill">Git</span>
+      <span class="skill">Selenium</span>
+
+    </div>
+
+  </div>
+
 </section>
+
+<!-- PROJECTS -->
 
 <section class="section" id="projects">
-<div class="container">
-<div class="section-label">03 / Selected Work</div>
-<h2>Projects & analysis.</h2>
-<div class="cards">
 
-<article class="card featured">
-<div class="card-number">FEATURED CASE STUDY / 01 · BUSINESS INTELLIGENCE</div>
-<h3>India Online Sales Performance Analysis</h3>
-<p>
-Joined 1,500 order-detail rows with 500 order records from a public Kaggle dataset. Built an interactive browser-based dashboard to explore sales, recorded profit, product categories, payment modes and state-level performance. The source files are processed locally in the browser.
-</p>
-<div class="tags">
-<span class="tag">SQL</span>
-<span class="tag">Python</span>
-<span class="tag">Pandas</span>
-<span class="tag">JavaScript</span>
-<span class="tag">Interactive Dashboard</span>
-</div>
-<div class="project-links">
-<a href="dashboard.html" target="_blank" rel="noopener">Open Live Dashboard ↗</a>
-<a href="https://www.kaggle.com/datasets/samruddhi4040/online-sales-data" target="_blank" rel="noopener">Dataset Source ↗</a>
-<a href="https://github.com/lamdebarghya/debarghya-portfolio-data-as" target="_blank" rel="noopener">GitHub Repository ↗</a>
-</div>
-</article>
+  <div class="container">
 
-<article class="card">
-<div class="card-number">PROJECT 02 / BUSINESS INTELLIGENCE</div>
-<h3>Sales Data Analysis & Executive Dashboard</h3>
-<p>
-Analysed sales records to identify business performance trends, key metrics and insights. Developed an executive Power BI dashboard for KPI tracking and performance monitoring.
-</p>
-<div class="tags">
-<span class="tag">SQL</span>
-<span class="tag">Power BI</span>
-<span class="tag">Data Analysis</span>
-</div>
-</article>
+    <div class="section-label">03 / Selected Work</div>
 
-<article class="card">
-<div class="card-number">PROJECT 03 / MACHINE LEARNING</div>
-<h3>Customer Churn Prediction</h3>
-<p>
-Explored customer behaviour and churn patterns. Performed data preprocessing and developed machine learning models to identify customers at risk of leaving.
-</p>
-<div class="tags">
-<span class="tag">Python</span>
-<span class="tag">Pandas</span>
-<span class="tag">Machine Learning</span>
-</div>
-</article>
+    <h2>Projects & analysis.</h2>
 
-<article class="card">
-<div class="card-number">PROJECT 04 / DATA ENGINEERING</div>
-<h3>LinkedIn Data Scraping & Analysis</h3>
-<p>
-Developed a Python-based data extraction workflow to collect structured job and company information. Stored structured results in SQL for further analysis.
-</p>
-<div class="tags">
-<span class="tag">Python</span>
-<span class="tag">Selenium</span>
-<span class="tag">SQL</span>
-</div>
-</article>
+    <div class="cards">
 
-<article class="card">
-<div class="card-number">PROJECT 05 / ANALYTICS PRODUCTIVITY</div>
-<h3>Generative AI for Analytics</h3>
-<p>
-Applied Generative AI tools to support report drafting, data analysis, summarization and analytical productivity.
-</p>
-<div class="tags">
-<span class="tag">ChatGPT</span>
-<span class="tag">Data Analytics</span>
-<span class="tag">AI Tools</span>
-</div>
-</article>
+      <article class="card featured">
 
-</div>
-</div>
+        <div class="card-number">
+          FEATURED CASE STUDY / 01 · BUSINESS INTELLIGENCE
+        </div>
+
+        <h3>India Online Sales Performance Analysis</h3>
+
+        <p>
+          Joined order-detail and order-level CSV data to build
+          an interactive browser-based dashboard. Explore sales,
+          recorded profit, product categories, payment modes and
+          state-level performance using the source dataset.
+        </p>
+
+        <div class="tags">
+          <span class="tag">SQL</span>
+          <span class="tag">Python</span>
+          <span class="tag">Pandas</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">Interactive Dashboard</span>
+        </div>
+
+        <div class="project-links">
+
+          <a class="project-link"
+             href="https://iamdebarghya.github.io/debarghya-portfolio-data-as/dashboard.html"
+             target="_blank" rel="noopener">
+            Open Live Dashboard ↗
+          </a>
+
+          <a class="project-link"
+             href="https://github.com/lamdebarghya/debarghya-portfolio-data-as#india-online-sales-performance-analysis"
+             target="_blank" rel="noopener">
+            Read Case Study ↗
+          </a>
+
+          <a class="project-link"
+             href="https://github.com/lamdebarghya/debarghya-portfolio-data-as"
+             target="_blank" rel="noopener">
+            GitHub Repository ↗
+          </a>
+
+        </div>
+
+      </article>
+
+      <article class="card">
+
+        <div class="card-number">
+          PROJECT 02 / BUSINESS INTELLIGENCE
+        </div>
+
+        <h3>Sales Data Analysis & Executive Dashboard</h3>
+
+        <p>
+          Analysed sales data to identify business performance
+          trends, key metrics and insights. Developed an executive
+          Power BI dashboard concept for KPI tracking and
+          performance monitoring.
+        </p>
+
+        <div class="tags">
+          <span class="tag">SQL</span>
+          <span class="tag">Power BI</span>
+          <span class="tag">Data Analysis</span>
+        </div>
+
+      </article>
+
+      <article class="card">
+
+        <div class="card-number">
+          PROJECT 03 / MACHINE LEARNING
+        </div>
+
+        <h3>Customer Churn Prediction</h3>
+
+        <p>
+          Explored customer behaviour and churn patterns,
+          performed data preprocessing and worked with machine
+          learning techniques to identify customers who may be
+          at risk of leaving.
+        </p>
+
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">Pandas</span>
+          <span class="tag">Machine Learning</span>
+        </div>
+
+      </article>
+
+      <article class="card">
+
+        <div class="card-number">
+          PROJECT 04 / DATA ENGINEERING
+        </div>
+
+        <h3>LinkedIn Data Scraping & Analysis</h3>
+
+        <p>
+          Developed a Python-based data extraction workflow
+          to collect structured job and company information
+          for further analysis.
+        </p>
+
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">Selenium</span>
+          <span class="tag">SQL</span>
+        </div>
+
+      </article>
+
+      <article class="card">
+
+        <div class="card-number">
+          PROJECT 05 / ANALYTICS PRODUCTIVITY
+        </div>
+
+        <h3>Generative AI for Analytics</h3>
+
+        <p>
+          Explored the use of generative AI tools to support
+          report drafting, data summarization and analytical
+          productivity.
+        </p>
+
+        <div class="tags">
+          <span class="tag">Generative AI</span>
+          <span class="tag">Data Analytics</span>
+        </div>
+
+      </article>
+
+    </div>
+
+  </div>
+
 </section>
+
+<!-- EXPERIENCE -->
 
 <section class="section" id="experience">
-<div class="container">
-<div class="section-label">04 / Career</div>
-<h2>Professional experience.</h2>
-<div class="experience">
-<div class="timeline-item">
-<div class="date">2024 — PRESENT</div>
-<h3>Data Analytics Instructor</h3>
-<p>Boss Coder Academy · India</p>
-<ul>
-<li>Deliver training in SQL, Python and Power BI.</li>
-<li>Demonstrate data manipulation and dashboard workflows.</li>
-<li>Use practical datasets to explain analytics concepts.</li>
-<li>Demonstrate Generative AI tools for analytics productivity.</li>
-</ul>
-</div>
-<div class="timeline-item">
-<div class="date">2021 — 2023</div>
-<h3>Associate</h3>
-<p>Accenture · India</p>
-<ul>
-<li>Developed Power BI dashboards and business reports.</li>
-<li>Wrote and optimized SQL queries.</li>
-<li>Performed data validation and quality checks.</li>
-<li>Analysed trends and shared actionable recommendations.</li>
-<li>Automated recurring reporting workflows.</li>
-</ul>
-</div>
-</div>
-</div>
+
+  <div class="container">
+
+    <div class="section-label">04 / Career</div>
+
+    <h2>Professional experience.</h2>
+
+    <div class="experience">
+
+      <div class="timeline-item">
+
+        <div class="date">2024 — PRESENT</div>
+
+        <h3>Data Analytics Instructor</h3>
+
+        <p>Boss Coder Academy · India</p>
+
+        <ul>
+          <li>Deliver training in SQL, Python and Power BI.</li>
+          <li>Demonstrate data manipulation and dashboard workflows.</li>
+          <li>Use practical datasets to explain analytics concepts.</li>
+          <li>Introduce generative AI tools for analytics productivity.</li>
+        </ul>
+
+      </div>
+
+      <div class="timeline-item">
+
+        <div class="date">2021 — 2023</div>
+
+        <h3>Associate</h3>
+
+        <p>Accenture · India</p>
+
+        <ul>
+          <li>Worked on dashboards and business reporting.</li>
+          <li>Wrote SQL queries for data retrieval and analysis.</li>
+          <li>Performed data validation and quality checks.</li>
+          <li>Analysed trends and supported reporting workflows.</li>
+        </ul>
+
+      </div>
+
+    </div>
+
+  </div>
+
 </section>
+
+<!-- EDUCATION -->
 
 <section class="section" id="education">
-<div class="container">
-<div class="section-label">05 / Education</div>
-<h2>Academic background.</h2>
-<div class="education">
-<div class="card">
-<div class="date">2022 — 2024</div>
-<h3>Master of Computer Applications</h3>
-<p>Manipal Academy of Higher Education</p>
-</div>
-<div class="card">
-<div class="date">2018 — 2021</div>
-<h3>Bachelor of Computer Applications</h3>
-<p>University of Burdwan</p>
-</div>
-</div>
-<br>
-<div class="card">
-<h3>Certifications</h3>
-<p>Data Analyst Certification — Boss Coder Academy</p>
-<p>Deloitte Data Analytics Simulation — Forage</p>
-<p>Microsoft Data Analyst Badge — Credly</p>
-</div>
-</div>
+
+  <div class="container">
+
+    <div class="section-label">05 / Education</div>
+
+    <h2>Academic background.</h2>
+
+    <div class="education">
+
+      <div class="card">
+        <div class="date">2022 — 2024</div>
+        <h3>Master of Computer Applications</h3>
+        <p>Manipal Academy of Higher Education</p>
+      </div>
+
+      <div class="card">
+        <div class="date">2018 — 2021</div>
+        <h3>Bachelor of Computer Applications</h3>
+        <p>University of Burdwan</p>
+      </div>
+
+    </div>
+
+  </div>
+
 </section>
+
+<!-- CONTACT -->
 
 <section class="section" id="contact">
-<div class="container">
-<div class="section-label">06 / Contact</div>
-<div class="contact-box">
-<h2>Let's talk data.</h2>
-<p>Interested in data analytics, business intelligence or new opportunities? Feel free to connect.</p>
-<div class="contact-links">
-<a href="mailto:debarghya222@gmail.com">Email ↗</a>
-<a href="https://lnkd.in/dqadwPkx" target="_blank" rel="noopener">LinkedIn ↗</a>
-<a href="https://github.com/lamdebarghya" target="_blank" rel="noopener">GitHub ↗</a>
-</div>
-<p>Phone: +91 8637545465</p>
-</div>
-</div>
+
+  <div class="container">
+
+    <div class="section-label">06 / Contact</div>
+
+    <div class="contact-box">
+
+      <h2>Let's talk data.</h2>
+
+      <p>
+        Interested in data analytics, business intelligence
+        or new opportunities? Feel free to connect.
+      </p>
+
+      <div class="contact-links">
+
+        <a href="mailto:debarghya222@gmail.com">
+          Email ↗
+        </a>
+
+        <a href="https://lnkd.in/dqadwPkx"
+           target="_blank" rel="noopener">
+          LinkedIn ↗
+        </a>
+
+        <a href="https://github.com/lamdebarghya"
+           target="_blank" rel="noopener">
+          GitHub ↗
+        </a>
+
+      </div>
+
+      <p>Phone: +91 8637545465</p>
+
+    </div>
+
+  </div>
+
 </section>
 
+<!-- FOOTER -->
+
 <footer>
-<div class="container">
-© 2026 Debarghya Hajra · Data Analyst Portfolio
-<br>Designed with a focus on clarity, analysis and impact.
-</div>
+  <div class="container">
+    © 2026 Debarghya Hajra · Data Analyst Portfolio
+    <br>
+    Built with a focus on clarity, analysis and impact.
+  </div>
 </footer>
 
 </body>
