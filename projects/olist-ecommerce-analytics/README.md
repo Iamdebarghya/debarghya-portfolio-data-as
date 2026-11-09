@@ -9,6 +9,19 @@ An end-to-end analytics project built from the real, anonymised Brazilian E-Comm
 
 > The dataset contains real anonymised commercial transactions supplied by Olist. It is not Debarghya's employer data, and findings must be described as analysis of the public Olist dataset.
 
+## Source-data quality checks performed
+
+The uploaded archive was profiled before analysis. These checks returned no exceptions:
+
+- Duplicate order IDs: 0
+- Order items without a matching order: 0
+- Payment rows without a matching order: 0
+- Negative item prices or freight amounts: 0
+- Missing purchase timestamps: 0
+- Category-level item aggregation reconciles to eligible-order item GMV and item count.
+
+These checks describe the uploaded dataset snapshot; rerun the SQL checks after loading a fresh copy.
+
 ## Business questions
 1. How do order value and sales change month to month?
 2. Which product categories and states contribute most to sales?
