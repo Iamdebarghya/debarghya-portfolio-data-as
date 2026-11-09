@@ -99,5 +99,5 @@ def calculate_kpis(orders):
         "aov": float(eligible["item_revenue"].sum() / eligible["order_id"].nunique())
             if eligible["order_id"].nunique() else 0.0,
         "late_rate": float(dated["is_late"].mean()) if len(dated) else 0.0,
-        "avg_review": float(orders["review_score"].mean()) if orders["review_score"].notna().any() else 0.0,
+        "avg_review": float((orders["review_score"].fillna(0) * orders["review_count"].fillna(0)).sum() / orders["review_count"].sum())\n            if orders["review_count"].sum() else 0.0,
     }
