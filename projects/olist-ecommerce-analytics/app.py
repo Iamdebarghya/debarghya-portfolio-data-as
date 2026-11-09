@@ -56,7 +56,7 @@ d1.metric("Average delivery time",f"{delivered['delivery_days'].mean():.1f} days
 d2.metric("Average review score",f"{k['avg_review']:.2f} / 5" if k["avg_review"] else "N/A")
 review_rows = delivered.dropna(subset=["review_score","delivery_days"])
 if not review_rows.empty:
-    plot_data = review_rows.assign(delivery_status=review_rows["is_late"].map({True:"Late",False:"On time / date unavailable"}))
+    plot_data = review_rows.assign(delivery_status=review_rows.apply(lambda row: "Late" if row["is_late"] else ("On time" if row["has_delivery_dates"] else "Estimated date missing"), axis=1))
     st.plotly_chart(px.box(plot_data,x="delivery_status",y="review_score",points="outliers",
         labels={"delivery_status":"Delivery status","review_score":"Review score"}),use_container_width=True)
 st.download_button("Download filtered order-level data",filtered.to_csv(index=False).encode("utf-8-sig"),
