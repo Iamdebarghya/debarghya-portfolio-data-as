@@ -1,53 +1,34 @@
+# Debarghya Hajra | Data Analyst Portfolio
 
-# Debarghya Hajra | Data Analytics Portfolio
+Personal portfolio showcasing my work and learning across SQL, Python, Power BI and Advanced Excel.
 
-Welcome to my Data Analytics portfolio.
+**Live portfolio:** https://iamdebarghya.github.io/debarghya-portfolio-data-as/
 
-I work with SQL, Python, Power BI and Excel to explore data, build dashboards and generate meaningful business insights.
+## Featured work
 
-## Featured Project
+The portfolio links to the original repositories and working files. Some projects use sample or synthetic data for demonstration and learning. Those are labelled as samples and must not be interpreted as real client or company results.
 
-### India Online Sales Performance Analysis
+- **India Online Sales Performance Dashboard** — browser-based CSV dashboard. Load the source CSV files to explore sales, profit, units and trends.
+- **HR Dashboard (Advanced Excel)** — original workbook and screenshot in the HR Dashboard repository.
+- **Sales Performance Analysis (Python)** — exploratory analysis and charts using illustrative sample data.
+- **SQL Data Warehouse Design** — dimensional modelling exercise with synthetic seed records and analytical queries.
+- **Public LinkedIn Profile Finder** — Python command-line research utility that uses SerpAPI to find publicly indexed profiles. Requires the user's own API key.
 
-An interactive Business Intelligence case study using two CSV datasets.
+## Technologies
 
-**Key features**
-- Combine and analyse multiple CSV datasets
-- Calculate sales, profit and profit margin
-- Explore monthly sales trends
-- Analyse product and regional performance
-- Filter by state, category and payment mode
-- Interactive charts and KPI dashboard
+SQL, MySQL, Python, Pandas, NumPy, Power BI, Microsoft Excel, JavaScript, GitHub.
 
-**Technologies:** SQL, Python, Pandas, JavaScript, Data Visualization
+## Repository structure
 
-### Live Dashboard
-https://iamdebarghya.github.io/debarghya-portfolio-data-as/dashboard.html
+- `index.html` — personal portfolio website
+- `dashboard.html` — interactive sales analysis dashboard
 
-## Portfolio Website
-https://iamdebarghya.github.io/debarghya-portfolio-data-as/
+## Data and project integrity
 
-## GitHub Repository
-https://github.com/iamdebarghya/debarghya-portfolio-data-as
-
-## Skills
-- SQL
-- Python
-- Pandas
-- NumPy
-- Power BI
-- Microsoft Excel
-- Power Query
-- Data Cleaning
-- Exploratory Data Analysis
-- Data Visualization
-
-## Professional Experience
-- Data Analytics Instructor, Boss Coder Academy
-- Associate, Accenture
+Sample datasets are explicitly identified. No sample metric is represented as a real business outcome. Project descriptions link to the source code or workbook so reviewers can inspect the underlying work.
 
 ## Contact
-- Email: debarghya222@gmail.com
-- LinkedIn: https://lnkd.in/dqadwPkx
 
-© 2026 Debarghya Hajra
+Debarghya Hajra  
+Email: debarghya222@gmail.com  
+GitHub: https://github.com/Iamdebarghya
