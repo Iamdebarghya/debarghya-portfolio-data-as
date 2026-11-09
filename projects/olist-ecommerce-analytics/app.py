@@ -1,16 +1,20 @@
 import streamlit as st
 import plotly.express as px
-from src.olist import load_dataset, prepare_orders, prepare_category_revenue, calculate_kpis
+from src.olist import load_dataset, load_dataset_from_zip, prepare_orders, prepare_category_revenue, calculate_kpis
 
 st.set_page_config(page_title="Olist E-commerce Analytics", page_icon="📦", layout="wide")
 st.title("Brazilian E-commerce | Business Performance")
 st.caption("Analysis of Olist's anonymised public commercial dataset (2016–2018).")
+st.sidebar.header("Dataset")
+uploaded_zip = st.sidebar.file_uploader("Upload Olist Kaggle ZIP", type=["zip"],
+    help="Upload the original Brazilian E-Commerce Public Dataset ZIP. The app reads it in memory.")
 try:
-    frames = load_dataset()
+    frames = load_dataset_from_zip(uploaded_zip) if uploaded_zip else load_dataset()
     data = prepare_orders(frames)
-except FileNotFoundError as exc:
-    st.warning(str(exc))
-    st.markdown("[Open the Kaggle dataset](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)")
+except (FileNotFoundError, ValueError, Exception) as exc:
+    st.warning(f"Dataset not loaded: {exc}")
+    st.markdown("[Download the Olist Kaggle dataset](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)")
+    st.info("Upload the ZIP in the sidebar. The raw data is processed in memory and is not committed to GitHub.")
     st.stop()
 
 months = sorted(data["purchase_month"].dropna().unique().tolist())
