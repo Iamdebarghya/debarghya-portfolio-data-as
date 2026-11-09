@@ -57,5 +57,33 @@ The app does not bundle or redistribute Kaggle data. It reads the CSV files from
 ## Data quality and interpretation
 The source has one-to-many relationships. Joining order items directly to payments or reviews can multiply rows and inflate totals. Aggregate each child table to order grain before combining, or calculate metrics from their correct grain. Canceled/unavailable orders and missing timestamps are handled explicitly in the code. Review scores indicate submitted reviews, not all customers.
 
+## Verified dataset profile and findings
+
+The uploaded Kaggle archive was checked directly. It contains all nine source CSV files. The purchase period is 4 September 2016 to 17 October 2018.
+
+| Data entity | Rows / unique IDs |
+|---|---:|
+| Orders | 99,441 |
+| Unique customer IDs | 99,441 |
+| Order item rows | 112,650 |
+| Products | 32,951 |
+| Sellers | 3,095 |
+| Delivered orders | 96,478 |
+
+Headline results recalculated from the uploaded CSVs:
+
+| Metric | Result | Definition |
+|---|---:|---|
+| Delivered item GMV | R$13,221,498.11 | Sum of item prices for delivered orders |
+| Delivered orders | 96,478 | Distinct delivered order IDs |
+| Delivered average order value | R$137.04 | Delivered item GMV / delivered orders |
+| On-time delivery rate | 91.89% | Delivered on/before estimate, among delivered orders with both timestamps |
+| Average delivery time | 12.56 days | Purchase to customer delivery, delivered orders |
+| Average review score | 4.09 / 5 | Mean of submitted review records |
+
+Top item-revenue categories include Health & Beauty, Watches & Gifts, Bed Bath & Table, Sports & Leisure, and Computers & Accessories.
+
+These are descriptive results from Olist's anonymised public dataset, not employer or client data. Revenue is calculated from item price, not payment records. Category revenue must be calculated at item grain. Joining raw item, payment and review tables before aggregation can multiply rows and inflate totals.
+
 ## Attribution
 Dataset provided by Olist via Kaggle. Please retain attribution and comply with the CC BY-NC-SA 4.0 license.
