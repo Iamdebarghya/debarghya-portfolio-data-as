@@ -8,7 +8,7 @@ class OlistMetricTests(unittest.TestCase):
             "order_id":["a","b","c"], "order_status":["delivered","canceled","shipped"],
             "item_revenue":[100.0,50.0,40.0], "freight_value":[10.0,5.0,4.0],
             "is_delivered":[True,False,False], "is_late":[False,False,False],
-            "has_delivery_dates":[True,False,False], "review_score":[5.0,None,4.0]})
+            "has_delivery_dates":[True,False,False], "review_score":[5.0,None,4.0], "review_count":[1,0,1]})
         result=calculate_kpis(data)
         self.assertEqual(result["orders"],2)
         self.assertEqual(result["gmv"],140.0)
@@ -22,7 +22,7 @@ class OlistMetricTests(unittest.TestCase):
             "order_id":["a","b","c"], "order_status":["delivered"]*3,
             "item_revenue":[1.0]*3, "freight_value":[0.0]*3,
             "is_delivered":[True]*3, "is_late":[True,False,False],
-            "has_delivery_dates":[True,True,False], "review_score":[4.0]*3})
+            "has_delivery_dates":[True,True,False], "review_score":[4.0]*3, "review_count":[1,1,1]})
         self.assertEqual(calculate_kpis(data)["late_rate"],0.5)
 
     def test_category_revenue_uses_item_grain(self):
