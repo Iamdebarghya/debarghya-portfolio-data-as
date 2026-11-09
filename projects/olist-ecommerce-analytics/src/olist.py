@@ -1,4 +1,6 @@
 from pathlib import Path
+from io import BytesIO
+from zipfile import ZipFile
 import pandas as pd
 
 FILES = {
@@ -26,6 +28,23 @@ def load_dataset(data_dir="data/raw"):
             frames[key] = pd.read_csv(root / filename)
         except UnicodeDecodeError:
             frames[key] = pd.read_csv(root / filename, encoding="latin1")
+    return frames
+
+
+def load_dataset_from_zip(uploaded_zip):
+    """Read the required Olist CSVs directly from a user-uploaded Kaggle ZIP."""
+    frames = {}
+    with ZipFile(uploaded_zip) as archive:
+        members = {Path(name).name: name for name in archive.namelist() if name.lower().endswith(".csv")}
+        missing = [filename for filename in FILES.values() if filename not in members]
+        if missing:
+            raise ValueError("ZIP is missing required CSV files: " + ", ".join(missing))
+        for key, filename in FILES.items():
+            raw = archive.read(members[filename])
+            try:
+                frames[key] = pd.read_csv(BytesIO(raw))
+            except UnicodeDecodeError:
+                frames[key] = pd.read_csv(BytesIO(raw), encoding="latin1")
     return frames
 
 def _category_items(frames):
