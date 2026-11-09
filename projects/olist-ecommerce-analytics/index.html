@@ -34,17 +34,17 @@ function run(){
  const delivered=orders.filter(o=>o.order_status==="delivered"),dated=delivered.filter(o=>o.order_delivered_customer_date&&o.order_estimated_delivery_date);
  const late=dated.filter(o=>date(o.order_delivered_customer_date)>date(o.order_estimated_delivery_date)).length;
  $("orders").textContent=orderCount.toLocaleString();$("gmv").textContent=money(gmv);$("aov").textContent=money(orderCount?gmv/orderCount:0);$("late").textContent=(dated.length?late/dated.length:0).toLocaleString("en-US",{style:"percent",maximumFractionDigits:1});
- const months=group(eligible,i=>{const o=orders.find(x=>x.order_id===i.order_id);return o?String(o.order_purchase_timestamp).slice(0,7):"Unknown"},i=>i.price);
+ const orderMap=new Map(orders.map(o=>[o.order_id,o]));
+ const months=new Map(),cat=new Map(),st=new Map(),catOrders=new Map(),catItems=new Map();
+ for(const item of eligible){const o=orderMap.get(item.order_id);if(!o)continue;const month=String(o.order_purchase_timestamp||"").slice(0,7);months.set(month,(months.get(month)||0)+item.price);const category=baseTranslations[baseProducts[item.product_id]]||baseProducts[item.product_id]||"Unknown";cat.set(category,(cat.get(category)||0)+item.price);st.set(o.customer_state,(st.get(o.customer_state)||0)+item.price);catItems.set(category,(catItems.get(category)||0)+1);if(!catOrders.has(category))catOrders.set(category,new Set());catOrders.get(category).add(item.order_id)}
  const monthKeys=[...months.keys()].sort();
- const cat=group(eligible,i=>baseTranslations[baseProducts[i.product_id]]||baseProducts[i.product_id]||"Unknown",i=>i.price);
  const catRows=[...cat].sort((a,b)=>b[1]-a[1]).slice(0,12);
- const st=group(eligible,i=>{const o=orders.find(x=>x.order_id===i.order_id);return o?o.customer_state:"??"},i=>i.price);
  const stateRows=[...st].sort((a,b)=>b[1]-a[1]).slice(0,15);
- const reviews=delivered.filter(o=>o.review_score!==null);
+ const reviews=orders.filter(o=>o.review_score!==null);
  $("delivery").textContent="Delivered orders: "+delivered.length.toLocaleString()+" · On-time eligible: "+dated.length.toLocaleString()+" · Average delivery days: "+(delivered.map(o=>date(o.order_delivered_customer_date)&&date(o.order_purchase_timestamp)?(date(o.order_delivered_customer_date)-date(o.order_purchase_timestamp))/86400000:null).filter(x=>x!==null).reduce((a,b)=>a+b,0)/Math.max(1,delivered.filter(o=>date(o.order_delivered_customer_date)&&date(o.order_purchase_timestamp)).length)).toFixed(1)+" · Average review: "+(reviews.length?sum(reviews,o=>o.review_score)/reviews.length:0).toFixed(2)+"/5";
  destroyCharts();chart("monthly","line",monthKeys,monthKeys.map(k=>months.get(k)),"Item revenue");chart("categories","bar",catRows.map(x=>x[0]),catRows.map(x=>x[1]),"Revenue",true);chart("states","bar",stateRows.map(x=>x[0]),stateRows.map(x=>x[1]),"Revenue"); 
  const scoreMap=group(reviews,o=>String(o.review_score),()=>1);chart("reviews","bar",[1,2,3,4,5],[1,2,3,4,5].map(x=>scoreMap.get(String(x))||0),"Review count");
- $("categoryTable").innerHTML=catRows.map(([name,value])=>"<tr><td>"+name+"</td><td>"+money(value)+"</td><td>"+new Set(eligible.filter(i=>(baseTranslations[baseProducts[i.product_id]]||baseProducts[i.product_id]||"Unknown")===name).map(i=>i.order_id)).size.toLocaleString()+"</td><td>"+eligible.filter(i=>(baseTranslations[baseProducts[i.product_id]]||baseProducts[i.product_id]||"Unknown")===name).length.toLocaleString()+"</td></tr>").join("");
+ $("categoryTable").innerHTML=catRows.map(([name,value])=>"<tr><td>"+name+"</td><td>"+money(value)+"</td><td>"+(catOrders.get(name)?.size||0).toLocaleString()+"</td><td>"+(catItems.get(name)||0).toLocaleString()+"</td></tr>").join("");
 }
 $("file").addEventListener("change",async e=>{const f=e.target.files[0];if(!f)return;$("status").textContent="Reading ZIP and validating source files…";$("dashboard").classList.add("hidden");try{
  const zip=await JSZip.loadAsync(f);const files={};for(const name of required){const entry=Object.values(zip.files).find(x=>!x.dir&&x.name.split("/").pop()===name);if(!entry)throw new Error("Missing file: "+name);files[name]=parseCsv(await entry.async("text"))}
