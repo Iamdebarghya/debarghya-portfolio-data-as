@@ -64,7 +64,7 @@ The uploaded Kaggle archive was checked directly. It contains all nine source CS
 | Data entity | Rows / unique IDs |
 |---|---:|
 | Orders | 99,441 |
-| Unique customer IDs | 99,441 |
+| Customer records | 99,441 |\n| Unique customer identities | 96,096 |
 | Order item rows | 112,650 |
 | Products | 32,951 |
 | Sellers | 3,095 |
