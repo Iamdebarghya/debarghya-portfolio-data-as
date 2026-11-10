@@ -11,7 +11,7 @@ uploaded_zip = st.sidebar.file_uploader("Upload Olist Kaggle ZIP", type=["zip"],
 try:
     frames = load_dataset_from_zip(uploaded_zip) if uploaded_zip else load_dataset()
     data = prepare_orders(frames)
-except (FileNotFoundError, ValueError, Exception) as exc:
+except Exception as exc:
     st.warning(f"Dataset not loaded: {exc}")
     st.markdown("[Download the Olist Kaggle dataset](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)")
     st.info("Upload the ZIP in the sidebar. The raw data is processed in memory and is not committed to GitHub.")
