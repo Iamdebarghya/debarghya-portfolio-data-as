@@ -46,7 +46,7 @@ kaggle datasets download -d olistbr/brazilian-ecommerce -p data/raw --unzip
 
 If you prefer manual download, get the ZIP from the Kaggle page above and extract its CSV files into `data/raw/`.
 
-Expected files include `olist_orders_dataset.csv`, `olist_order_items_dataset.csv`, `olist_customers_dataset.csv`, `olist_order_payments_dataset.csv`, `olist_order_reviews_dataset.csv`, `olist_products_dataset.csv`, `olist_sellers_dataset.csv`, and `product_category_name_translation.csv`.
+The app requires these eight files: `olist_orders_dataset.csv`, `olist_order_items_dataset.csv`, `olist_customers_dataset.csv`, `olist_order_payments_dataset.csv`, `olist_order_reviews_dataset.csv`, `olist_products_dataset.csv`, `olist_sellers_dataset.csv`, and `product_category_name_translation.csv`. The original Kaggle archive may also include `geolocation_dataset.csv`; it is not required by this app.
 
 ## Run locally
 ```bash
@@ -72,7 +72,7 @@ The source has one-to-many relationships. Joining order items directly to paymen
 
 ## Verified dataset profile and findings
 
-The uploaded Kaggle archive was checked directly. It contains all nine source CSV files. The purchase period is 4 September 2016 to 17 October 2018.
+The original Kaggle archive contains nine CSV files; this app currently uses eight of them. The geolocation file is not used by the current analysis. The purchase period is 4 September 2016 to 17 October 2018.
 
 | Data entity | Rows / unique IDs |
 |---|---:|
