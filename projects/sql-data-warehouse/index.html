@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SQL Sales Data Warehouse | Debarghya Hajra</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&family=DM+Mono&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#f7f7f4;--ink:#192b40;--muted:#65717d;--line:#d9dedb;--accent:#b85e40}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.65 "DM Sans",Arial}.wrap{width:min(1000px,calc(100% - 36px));margin:auto}header{padding:18px 0;border-bottom:1px solid var(--line)}a{color:var(--ink)}.brand{text-decoration:none;font-weight:700}.brand b,.eyebrow{color:var(--accent)}.back{float:right;color:var(--muted)}main{padding:44px 0}h1{font:500 clamp(38px,6vw,60px)/1.05 "Playfair Display",Georgia;margin:10px 0}.eyebrow,.tag{font:11px "DM Mono";letter-spacing:.1em;text-transform:uppercase}.intro{max-width:760px;color:var(--muted)}.panel{background:#fff;border:1px solid var(--line);border-radius:10px;padding:20px;margin:18px 0}.panel h2{font:500 24px "Playfair Display";margin:0 0 10px}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.schema{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.entity{border:1px solid var(--line);border-radius:8px;padding:12px}.entity strong{display:block}.entity span,.muted{font-size:13px;color:var(--muted)}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#192b40;color:#f7f7f4;padding:16px;border-radius:8px;font:12px/1.6 "DM Mono",monospace}.actions{display:flex;gap:10px;flex-wrap:wrap}.actions a{display:inline-block;border:1px solid var(--line);border-radius:6px;padding:9px 12px;text-decoration:none;background:white;font-size:13px}.actions a:hover{border-color:var(--accent)}li{margin:5px 0}.notice{font-size:12px;color:var(--muted)}@media(max-width:650px){.grid,.schema{grid-template-columns:1fr}.back{float:none;display:block;margin-top:6px}}
+</style></head>
+<body><header><div class="wrap"><a class="brand" href="../../index.html">DEBARGHYA <b>HAJRA</b></a><a class="back" href="../../index.html#projects">← Back to portfolio</a></div></header>
+<main class="wrap">
+<div class="eyebrow">SQL · DATA MODELLING · BUSINESS INTELLIGENCE</div>
+<h1>Sales Data Warehouse Design</h1>
+<p class="intro">A MySQL 8+ dimensional modelling project that organizes transactional sales data into a star schema for BI reporting and analytical SQL. The repository includes schema creation, small synthetic seed data and example business queries.</p>
+<div class="panel"><h2>Project objective</h2><p>Build a consistent reporting layer for revenue, cost, gross profit, product performance, regional contribution and customer-segment analysis.</p><div class="actions"><a href="https://github.com/Iamdebarghya/SQL-Data-Warehouse-Design">Open GitHub repository ↗</a><a href="https://github.com/Iamdebarghya/SQL-Data-Warehouse-Design/blob/main/README.md">Read documentation ↗</a><a href="https://github.com/Iamdebarghya/SQL-Data-Warehouse-Design/blob/main/schema.sql">View schema.sql ↗</a><a href="https://github.com/Iamdebarghya/SQL-Data-Warehouse-Design/blob/main/queries.sql">View queries.sql ↗</a></div></div>
+<div class="panel"><h2>Warehouse architecture</h2><pre>Transactional sales
+        |
+        v
+Staging / validation
+        |
+        v
+   fact_sales  -------- dim_date
+        |  \----------- dim_product
+        |  \----------- dim_region
+        \--------------- dim_customer
+        |
+        v
+BI dashboards & analytical SQL</pre><p class="notice">The current repository demonstrates the dimensional model with synthetic sample records. It is not a hosted database or a live dashboard.</p></div>
+<div class="panel"><h2>Star schema</h2><div class="schema">
+<div class="entity"><strong>fact_sales</strong><span>order_id, date_key, region_key, product_key, customer_key, quantity, sales_amount, discount_amount, cost_amount</span></div>
+<div class="entity"><strong>dim_date</strong><span>full_date, day_num, month_num, month_name, quarter_num, year_num</span></div>
+<div class="entity"><strong>dim_product</strong><span>product_name, category, subcategory</span></div>
+<div class="entity"><strong>dim_region</strong><span>region_name</span></div>
+<div class="entity"><strong>dim_customer</strong><span>customer_code, customer_segment</span></div>
+</div></div>
+<div class="grid">
+<div class="panel"><h2>Analytical SQL included</h2><ul><li>Monthly revenue, cost and gross profit</li><li>Regional revenue contribution</li><li>Product performance and gross profit</li><li>Customer segment and average order value</li><li>Month-over-month growth using LAG()</li><li>Discount and gross margin by category</li></ul></div>
+<div class="panel"><h2>How to run</h2><ol><li>Use MySQL 8+ in a local development environment.</li><li>Run <code>schema.sql</code> to create and seed <code>sales_warehouse</code>.</li><li>Run the statements in <code>queries.sql</code>.</li><li>Reconcile totals before using the model for real reporting.</li></ol></div>
+</div>
+<div class="panel"><h2>Tools and limitations</h2><p>MySQL 8+, SQL DDL, dimensional modelling, joins, aggregations, CTEs and window functions. Seed data is synthetic and intended to demonstrate the schema and queries. Tax, returns and shipping treatment would need confirmation for a real source.</p></div>
+</main></body></html>
