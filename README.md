@@ -1,6 +1,6 @@
-# Debarghya Hajra | Data Analyst Portfolio
+# Debarghya Hajra | Data Analyst & Instructor Portfolio
 
-Personal portfolio showcasing my work and learning across SQL, Python, Power BI and Advanced Excel.
+Personal portfolio showcasing my work and learning across SQL, Python, Power BI and Advanced Excel, alongside my work in data analytics instruction.
 
 **Live portfolio:** https://iamdebarghya.github.io/debarghya-portfolio-data-as/
 
