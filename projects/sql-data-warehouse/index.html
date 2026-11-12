@@ -11,21 +11,19 @@
 <main class="wrap">
 <div class="eyebrow">SQL · DATA MODELLING · BUSINESS INTELLIGENCE</div>
 <h1>Sales Data Warehouse Design</h1>
-<p class="intro">A MySQL 8+ dimensional modelling project that organizes transactional sales data into a star schema for BI reporting and analytical SQL. The repository includes schema creation, small synthetic seed data and example business queries.</p>
-<div class="panel"><h2>Project objective</h2><p>Build a consistent reporting layer for revenue, cost, gross profit, product performance, regional contribution and customer-segment analysis.</p><div class="actions"><a href="https://github.com/Iamdebarghya/SQL-Data-Warehouse-Design">Open GitHub repository ↗</a><a href="https://github.com/Iamdebarghya/SQL-Data-Warehouse-Design/blob/main/README.md">Read documentation ↗</a><a href="https://github.com/Iamdebarghya/SQL-Data-Warehouse-Design/blob/main/schema.sql">View schema.sql ↗</a><a href="https://github.com/Iamdebarghya/SQL-Data-Warehouse-Design/blob/main/queries.sql">View queries.sql ↗</a></div></div>
-<div class="panel"><h2>Warehouse architecture</h2>
+<p class="intro">This is a small sales warehouse built in MySQL 8+. It has one sales fact table and four dimension tables. The repository contains the table definitions, five sample sales rows and six example queries.</p>
+<div class="panel"><h2>Project objective</h2><p>The model separates sales measures from date, product, region and customer details so they can be queried together for reporting.</p><div class="actions"><a href="https://github.com/Iamdebarghya/SQL-Data-Warehouse-Design">Open GitHub repository ↗</a><a href="https://github.com/Iamdebarghya/SQL-Data-Warehouse-Design/blob/main/README.md">Read documentation ↗</a><a href="https://github.com/Iamdebarghya/SQL-Data-Warehouse-Design/blob/main/schema.sql">View schema.sql ↗</a><a href="https://github.com/Iamdebarghya/SQL-Data-Warehouse-Design/blob/main/queries.sql">View queries.sql ↗</a></div></div>
+<div class="panel"><h2>How the model is organised</h2>
 <div class="architecture">
-  <div class="arch-source"><span class="arch-label">SOURCE</span><strong>Transactional sales</strong><small>Order-level business records</small></div>
-  <div class="arch-arrow">↓</div>
-  <div class="arch-stage"><span class="arch-label">PROCESS</span><strong>Staging & validation</strong><small>Prepare and check incoming data</small></div>
+  <div class="arch-source"><span class="arch-label">SOURCE</span><strong>Sample sales records</strong><small>Five synthetic rows inserted by schema.sql</small></div>
   <div class="arch-arrow">↓</div>
   <div class="arch-core"><span class="arch-label">STAR SCHEMA</span><div class="arch-fact"><strong>fact_sales</strong><small>Measures · quantity · sales · discount · cost</small></div><div class="arch-dims"><div><strong>dim_date</strong><small>Time attributes</small></div><div><strong>dim_product</strong><small>Product attributes</small></div><div><strong>dim_region</strong><small>Geography</small></div><div><strong>dim_customer</strong><small>Customer segment</small></div></div></div>
   <div class="arch-arrow">↓</div>
-  <div class="arch-output"><span class="arch-label">CONSUMPTION</span><strong>BI dashboards & analytical SQL</strong><small>Business reporting and analysis</small></div>
+  <div class="arch-output"><span class="arch-label">CONSUMPTION</span><strong>Analytical SQL queries</strong><small>Revenue, margin, product and customer summaries</small></div>
 </div>
-<p class="notice">The schema and sample records are defined in the repository's SQL files. The diagram shows the intended logical flow, not a running production pipeline.</p>
+<p class="notice">The schema and sample records are defined in the repository's SQL files. This diagram shows the tables and query flow in this demonstration. There is no live ETL pipeline or hosted dashboard.</p>
 </div>
-<div class="panel"><h2>Star schema</h2><div class="schema">
+<div class="panel"><h2>Tables created in schema.sql</h2><div class="schema">
 <div class="entity"><strong>fact_sales</strong><span>order_id, date_key, region_key, product_key, customer_key, quantity, sales_amount, discount_amount, cost_amount</span></div>
 <div class="entity"><strong>dim_date</strong><span>full_date, day_num, month_num, month_name, quarter_num, year_num</span></div>
 <div class="entity"><strong>dim_product</strong><span>product_name, category, subcategory</span></div>
@@ -33,8 +31,8 @@
 <div class="entity"><strong>dim_customer</strong><span>customer_code, customer_segment</span></div>
 </div></div>
 <div class="grid">
-<div class="panel"><h2>Analytical SQL included</h2><ul><li>Monthly revenue, cost and gross profit</li><li>Regional revenue contribution</li><li>Product performance and gross profit</li><li>Customer segment and average order value</li><li>Month-over-month growth using LAG()</li><li>Discount and gross margin by category</li></ul></div>
-<div class="panel"><h2>How to run</h2><ol><li>Use MySQL 8+ in a local development environment.</li><li>Run <code>schema.sql</code> to create and seed <code>sales_warehouse</code>.</li><li>Run the statements in <code>queries.sql</code>.</li><li>Reconcile totals before using the model for real reporting.</li></ol></div>
+<div class="panel"><h2>Queries in queries.sql</h2><ul><li>Monthly revenue, cost and gross profit</li><li>Regional revenue contribution</li><li>Product performance and gross profit</li><li>Customer segment and average order value</li><li>Month-over-month growth using LAG()</li><li>Discount and gross margin by category</li></ul></div>
+<div class="panel"><h2>Run the SQL locally</h2><ol><li>Use MySQL 8+ in a local development environment.</li><li>Run <code>schema.sql</code> to create and seed <code>sales_warehouse</code>.</li><li>Run the statements in <code>queries.sql</code>.</li><li>Reconcile totals before using the model for real reporting.</li></ol></div>
 </div>
-<div class="panel"><h2>Tools and limitations</h2><p>MySQL 8+, SQL DDL, dimensional modelling, joins, aggregations, CTEs and window functions. Seed data is synthetic and intended to demonstrate the schema and queries. Tax, returns and shipping treatment would need confirmation for a real source.</p></div>
+<div class="panel"><h2>Tools and project notes</h2><p>The project uses MySQL 8+, primary and foreign keys, joins, aggregations, a CTE and LAG(). The five sample sales rows are synthetic. Before applying this model to company data, define how tax, returns, shipping and discounts should be treated.</p></div>
 </main></body></html>
