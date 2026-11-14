@@ -67,6 +67,7 @@ These are **source-reported results**, not independently recalculated by this re
 
 ## Power BI implementation assets
 - [End-to-end Power BI build guide](docs/power_bi_build_guide.md)
+- [Analyst storytelling & interview walkthrough](docs/analyst_storytelling.md)
 - [Power Query staging template](power-query/LogiFlow_Staging.m)
 - [Dark Gold Power BI theme](theme/LogiFlow_Dark_Gold_Theme.json)
 - [DAX measures](dax/LogiFlow_Measures.dax)
