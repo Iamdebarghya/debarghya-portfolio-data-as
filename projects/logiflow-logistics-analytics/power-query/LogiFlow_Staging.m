@@ -79,8 +79,10 @@ let
         },
         "en-US"
     ),
-    // delivery_id is not unique in the source. Generate a stable row key after source ordering.
-    AddRowId = Table.AddIndexColumn(TypeNumerics, "row_id", 1, 1, Int64.Type),
+    // Remove exact duplicate source rows before generating row_id.
+    RemoveExactDuplicates = Table.Distinct(TypeNumerics),
+    // delivery_id is not unique in the source. Generate a surrogate row key.
+    AddRowId = Table.AddIndexColumn(RemoveExactDuplicates, "row_id", 1, 1, Int64.Type),
     AddDelayHours = Table.AddColumn(
         AddRowId,
         "delay_hours",
@@ -127,6 +129,6 @@ let
             else "12+ hours",
         type text
     ),
-    RemoveExactDuplicates = Table.Distinct(AddDelayBand)
+    Final = AddDelayBand
 in
-    RemoveExactDuplicates
+    Final
