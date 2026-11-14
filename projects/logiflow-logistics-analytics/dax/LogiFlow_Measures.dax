@@ -45,7 +45,7 @@ AVERAGE ( Fact_Deliveries[package_weight_kg] )
 
 Delivery Partner Rank =
 RANKX (
-    ALLSELECTED ( Fact_Deliveries[delivery_partner] ),
+    ALLSELECTED ( Dim_Partner[delivery_partner] ),
     [On-Time Delivery %],
     ,
     DESC,
