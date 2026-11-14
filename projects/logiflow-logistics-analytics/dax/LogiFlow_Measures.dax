@@ -58,19 +58,20 @@ CALCULATE (
     Fact_Deliveries[delayed] = 1
 ) * 0.15
 
-Calculated Delay Flag =
-IF (
-    Fact_Deliveries[delivery_time_hours] >
-        Fact_Deliveries[expected_time_hours],
-    1,
-    0
-)
+-- Create this as a CALCULATED COLUMN (not a measure):
+-- calculated_delay_flag =
+-- IF (
+--     Fact_Deliveries[delivery_time_hours] >
+--         Fact_Deliveries[expected_time_hours],
+--     1,
+--     0
+-- )
 
 Label vs Measurement Mismatch Rows =
 COUNTROWS (
     FILTER (
         Fact_Deliveries,
-        Fact_Deliveries[delayed] <> [Calculated Delay Flag]
+        Fact_Deliveries[delayed] <> Fact_Deliveries[calculated_delay_flag]
     )
 )
 
