@@ -65,6 +65,13 @@ These are **source-reported results**, not independently recalculated by this re
 - **Cost per KM** = total delivery cost / total distance. This is a ratio of sums, not an average of row-level ratios.
 - **Estimated Delay Cost** = delivery cost of delayed deliveries × 15%. This is a scenario assumption from the source project, not an observed cost or audited financial figure.
 
+## Power BI implementation assets
+- [End-to-end Power BI build guide](docs/power_bi_build_guide.md)
+- [Power Query staging template](power-query/LogiFlow_Staging.m)
+- [Dark Gold Power BI theme](theme/LogiFlow_Dark_Gold_Theme.json)
+- [DAX measures](dax/LogiFlow_Measures.dax)
+- [SQL validation queries](sql/logiflow_analysis.sql)
+
 ## Build instructions
 1. Download the CSV from the [original dataset repository](https://github.com/dikagra123/Last-Mile-Delivery-Project).
 2. Inspect the file headers and license/terms. Keep the raw file local if redistribution rights are unclear.
