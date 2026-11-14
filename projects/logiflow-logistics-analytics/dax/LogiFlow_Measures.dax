@@ -1,0 +1,78 @@
+-- Table name: Fact_Deliveries
+-- Map/rename the source headers to the canonical fields in docs/data_dictionary.md.
+
+Total Deliveries =
+COUNTROWS ( Fact_Deliveries )
+
+Delayed Deliveries =
+CALCULATE (
+    [Total Deliveries],
+    Fact_Deliveries[delayed] = 1
+)
+
+On-Time Deliveries =
+[Total Deliveries] - [Delayed Deliveries]
+
+On-Time Delivery % =
+DIVIDE ( [On-Time Deliveries], [Total Deliveries] )
+
+Delay Rate % =
+DIVIDE ( [Delayed Deliveries], [Total Deliveries] )
+
+Average Actual Delivery Time (Hours) =
+AVERAGE ( Fact_Deliveries[delivery_time_hours] )
+
+Average Expected Delivery Time (Hours) =
+AVERAGE ( Fact_Deliveries[expected_time_hours] )
+
+Average Delay (Hours) =
+AVERAGE ( Fact_Deliveries[delay_hours] )
+
+Total Delivery Cost =
+SUM ( Fact_Deliveries[delivery_cost] )
+
+Total Distance (KM) =
+SUM ( Fact_Deliveries[distance_km] )
+
+Cost per KM =
+DIVIDE ( [Total Delivery Cost], [Total Distance (KM)] )
+
+Average Delivery Rating =
+AVERAGE ( Fact_Deliveries[delivery_rating] )
+
+Average Package Weight (KG) =
+AVERAGE ( Fact_Deliveries[package_weight_kg] )
+
+Delivery Partner Rank =
+RANKX (
+    ALLSELECTED ( Fact_Deliveries[delivery_partner] ),
+    [On-Time Delivery %],
+    ,
+    DESC,
+    DENSE
+)
+
+Estimated Delay Cost (15% Scenario) =
+CALCULATE (
+    [Total Delivery Cost],
+    Fact_Deliveries[delayed] = 1
+) * 0.15
+
+Calculated Delay Flag =
+IF (
+    Fact_Deliveries[delivery_time_hours] >
+        Fact_Deliveries[expected_time_hours],
+    1,
+    0
+)
+
+Label vs Measurement Mismatch Rows =
+COUNTROWS (
+    FILTER (
+        Fact_Deliveries,
+        Fact_Deliveries[delayed] <> [Calculated Delay Flag]
+    )
+)
+
+-- If a real delivery_date column exists, add a proper Date table and
+-- activate the relationship before using time-intelligence measures.
