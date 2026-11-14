@@ -8,6 +8,12 @@ Recruiter-facing portfolio for selected work in SQL, Python, Power BI, Advanced 
 
 ## Featured case studies
 
+### 5. LogiFlow — Last-Mile Delivery Performance Analytics
+- Focus: delivery-mode reliability, partner scorecards, regional/weather/vehicle delay segmentation and exception analysis.
+- Methods: Power BI report design, DAX KPI measures, SQL validation queries and data-quality documentation.
+- Data: public 25,000-row last-mile delivery dataset credited to [dikagra123/Last-Mile-Delivery-Project](https://github.com/dikagra123/Last-Mile-Delivery-Project). Raw data is not redistributed here; review the source terms before reuse.
+- [Project overview and build assets](projects/logiflow-logistics-analytics/README.md) · [DAX](projects/logiflow-logistics-analytics/dax/LogiFlow_Measures.dax) · [SQL](projects/logiflow-logistics-analytics/sql/logiflow_analysis.sql)
+
 ### 1. Olist Brazilian E-commerce Analytics
 - Business questions: order value and sales trends, category and state contribution, delivery performance and customer reviews.
 - Methods: source profiling, data-quality checks, SQL data modelling, Python metric calculations and interactive reporting.
