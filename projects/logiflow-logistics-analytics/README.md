@@ -89,3 +89,10 @@ These are **source-reported results**, not independently recalculated by this re
 - SVG files are static design mockups, not screenshots of a running Power BI report.
 - All numerical findings above are attributed to the linked source project's README until independently reproduced.
 - Do not describe the 15% delay-cost scenario as actual company loss.
+
+## Interactive browser dashboard
+
+- [Open the interactive LogiFlow dashboard](./interactive-dashboard/)
+- The browser dashboard loads the public cleaned CSV directly from the original dataset repository. Region, delivery partner, delivery mode, vehicle type and weather filters recalculate the KPI cards, charts and detail table.
+- This is an interactive web portfolio companion, not a Power BI PBIX file. It requires an internet connection to load the source CSV and chart libraries.
+- The source schema has no verified delivery date field, so the dashboard does not fabricate a calendar-based trend. It compares delivery-mode performance instead.
