@@ -1,0 +1,60 @@
+{
+  "name": "LogiFlow Dark Gold",
+  "dataColors": [
+    "#D6A84F",
+    "#E8C46A",
+    "#4E9A91",
+    "#6D8FB3",
+    "#C97862",
+    "#9B8BC4",
+    "#7C9B78",
+    "#B8A477"
+  ],
+  "background": "#101318",
+  "foreground": "#F3F0E8",
+  "tableAccent": "#D6A84F",
+  "good": "#4E9A91",
+  "neutral": "#D6A84F",
+  "bad": "#C97862",
+  "maximum": "#D6A84F",
+  "center": "#7C8796",
+  "minimum": "#27313D",
+  "visualStyles": {
+    "*": {
+      "*": [
+        {
+          "titleColor": {
+            "solid": {
+              "color": "#F3F0E8"
+            }
+          },
+          "labelColor": {
+            "solid": {
+              "color": "#D7DCE2"
+            }
+          },
+          "background": [
+            {
+              "color": {
+                "solid": {
+                  "color": "#171C23"
+                }
+              },
+              "transparency": 0
+            }
+          ],
+          "border": [
+            {
+              "color": {
+                "solid": {
+                  "color": "#303946"
+                }
+              },
+              "show": true
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
