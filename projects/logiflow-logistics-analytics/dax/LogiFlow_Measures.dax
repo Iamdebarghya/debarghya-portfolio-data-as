@@ -77,3 +77,90 @@ COUNTROWS (
 
 -- If a real delivery_date column exists, add a proper Date table and
 -- activate the relationship before using time-intelligence measures.
+
+
+-- Dynamic context labels for report titles/cards
+Selected Region Label =
+"Region: " &
+COALESCE ( SELECTEDVALUE ( Dim_Region[region] ), "All regions" )
+
+Selected Delivery Mode Label =
+"Mode: " &
+COALESCE ( SELECTEDVALUE ( Dim_Mode[delivery_mode] ), "All modes" )
+
+Selected Partner Label =
+"Partner: " &
+COALESCE ( SELECTEDVALUE ( Dim_Partner[delivery_partner] ), "All partners" )
+
+Dynamic Report Context =
+[Selected Region Label] & " | " &
+[Selected Delivery Mode Label] & " | " &
+[Selected Partner Label]
+
+-- Comparison measures: retain other filters, remove only the named dimension
+Overall On-Time % (Ignore Mode) =
+CALCULATE (
+    [On-Time Delivery %],
+    REMOVEFILTERS ( Dim_Mode )
+)
+
+Mode On-Time Difference (pp) =
+100 * ( [On-Time Delivery %] - [Overall On-Time % (Ignore Mode)] )
+
+Overall Delay Rate % (Ignore Weather) =
+CALCULATE (
+    [Delay Rate %],
+    REMOVEFILTERS ( Dim_Weather )
+)
+
+Weather Delay Difference (pp) =
+100 * ( [Delay Rate %] - [Overall Delay Rate % (Ignore Weather)] )
+
+-- Dynamic narrative. Use in a Card visual with word wrap enabled.
+Mode Performance Insight =
+VAR ModeName = SELECTEDVALUE ( Dim_Mode[delivery_mode] )
+VAR ModeOnTime = [On-Time Delivery %]
+VAR Baseline = [Overall On-Time % (Ignore Mode)]
+VAR DifferencePP = 100 * ( ModeOnTime - Baseline )
+RETURN
+IF (
+    NOT HASONEVALUE ( Dim_Mode[delivery_mode] ),
+    "Select one delivery mode to see its on-time performance against the filtered overall baseline.",
+    ModeName & " is " &
+        FORMAT ( ABS ( DifferencePP ), "0.0" ) & " percentage points " &
+        IF ( DifferencePP >= 0, "above", "below" ) &
+        " the filtered overall on-time rate. Volume: " &
+        FORMAT ( [Total Deliveries], "#,##0" ) & " deliveries."
+)
+
+Weather Performance Insight =
+VAR WeatherName = SELECTEDVALUE ( Dim_Weather[weather] )
+VAR WeatherDelay = [Delay Rate %]
+VAR Baseline = [Overall Delay Rate % (Ignore Weather)]
+VAR DifferencePP = 100 * ( WeatherDelay - Baseline )
+RETURN
+IF (
+    NOT HASONEVALUE ( Dim_Weather[weather] ),
+    "Select one weather condition to compare its delay rate with the filtered baseline.",
+    WeatherName & " has a delay rate " &
+        FORMAT ( ABS ( DifferencePP ), "0.0" ) & " percentage points " &
+        IF ( DifferencePP >= 0, "above", "below" ) &
+        " the filtered overall delay rate. Volume: " &
+        FORMAT ( [Total Deliveries], "#,##0" ) & " deliveries."
+)
+
+Partner Performance Insight =
+VAR PartnerName = SELECTEDVALUE ( Dim_Partner[delivery_partner] )
+VAR PartnerRate = [On-Time Delivery %]
+VAR Baseline = CALCULATE ( [On-Time Delivery %], REMOVEFILTERS ( Dim_Partner ) )
+VAR DifferencePP = 100 * ( PartnerRate - Baseline )
+RETURN
+IF (
+    NOT HASONEVALUE ( Dim_Partner[delivery_partner] ),
+    "Select one delivery partner to compare its on-time rate with the filtered partner baseline.",
+    PartnerName & " is " &
+        FORMAT ( ABS ( DifferencePP ), "0.0" ) & " percentage points " &
+        IF ( DifferencePP >= 0, "above", "below" ) &
+        " the filtered partner baseline. Volume: " &
+        FORMAT ( [Total Deliveries], "#,##0" ) & " deliveries."
+)
