@@ -106,3 +106,63 @@ Filter exception table to delayed = 1. Sort by delay_hours descending.
 
 ## 8. Publish and portfolio proof
 After building in Power BI Desktop, save the PBIX locally, publish to Power BI Service if your account supports it, and add genuine screenshots plus the verified report link to this folder. Never describe a mockup as a live dashboard.
+
+
+## 9. Interaction-first design (required for portfolio proof)
+
+The report must behave like a working analyst-built Power BI report, not a static dashboard image.
+
+### Global interactions
+- Add synced slicers for Region, Delivery Mode, Vehicle Type, Weather and Delivery Partner.
+- Turn on visual interactions so selecting a bar/segment filters or highlights the other visuals where it makes analytical sense.
+- Add a visible Reset Filters bookmark/button.
+- Add a dynamic page subtitle that reflects the current filter context.
+- Show selected filter context in a small text card (for example, selected region and delivery mode).
+- Ensure KPI cards recalculate under slicers and cross-highlighting.
+
+### Dynamic DAX examples
+
+```DAX
+Selected Region Label =
+"Region: " &
+COALESCE (
+    SELECTEDVALUE ( Dim_Region[region] ),
+    "All regions"
+)
+
+Selected Delivery Mode Label =
+"Delivery mode: " &
+COALESCE (
+    SELECTEDVALUE ( Dim_Mode[delivery_mode] ),
+    "All modes"
+)
+
+Dynamic Report Context =
+[Selected Region Label] & " | " & [Selected Delivery Mode Label]
+
+On-Time % Previous Partner Context =
+CALCULATE (
+    [On-Time Delivery %],
+    REMOVEFILTERS ( Dim_Partner )
+)
+
+Partner On-Time Difference (pp) =
+100 * (
+    [On-Time Delivery %] - [On-Time % Previous Partner Context]
+)
+```
+
+Only create these measures if the corresponding dimensions exist and are related to Fact_Deliveries.
+
+### Page-specific analyst storytelling
+- **Executive Overview:** start with the question "Where are delays concentrated?" Add a short text insight that changes with the selected delivery mode/region. Avoid hard-coded conclusions.
+- **Partner Scorecard:** allow a partner selection to update the KPI cards and delivery-mode mix. Include volume beside percentages so low-volume partners are not misrepresented.
+- **Delay Drivers:** selecting weather, vehicle or distance category should update the exception table. Add a drill-through destination for a selected partner or delivery mode.
+
+### Proof that the report is genuinely interactive
+Capture three screenshots after the PBIX is built:
+1. Default/all-data view.
+2. Same page after selecting one region.
+3. Same page after selecting a delivery mode while the region filter remains active.
+
+The screenshots must come from the running Power BI report, not SVG mockups or generated illustrations. Keep one screenshot of the Power Query steps and one of the DAX measure pane as build evidence. Do not fake changing numbers in a static image.
