@@ -41,9 +41,10 @@ These are **source-reported results**, not independently recalculated by this re
 ## Dashboard design
 ### Page 1 — Executive Delivery Overview
 - KPI cards: Deliveries, On-Time %, Delayed %, Avg Delivery Time, Avg Distance, Delivery Cost
-- Monthly delivery trend
+- Delivery-mode performance comparison
 - On-time rate by delivery mode
 - Delay rate by region and weather
+- Dynamic filter-context insight and data-quality mismatch KPI
 - Slicers: Date, Region, Delivery Mode, Vehicle Type
 
 ### Page 2 — Partner Scorecard
@@ -53,7 +54,7 @@ These are **source-reported results**, not independently recalculated by this re
 - Drill-through to partner detail
 
 ### Page 3 — Delay Drivers & Exceptions
-- Delay distribution and delay-hour buckets
+- Delay distribution, distance buckets and delay-hour bands
 - Vehicle, weather, distance and package-weight analysis
 - Exception table with delivery ID/row ID, partner, region, mode, distance and delay
 - High-risk operational review filters
@@ -76,11 +77,11 @@ These are **source-reported results**, not independently recalculated by this re
 ## Build instructions
 1. Download the CSV from the [original dataset repository](https://github.com/dikagra123/Last-Mile-Delivery-Project).
 2. Inspect the file headers and license/terms. Keep the raw file local if redistribution rights are unclear.
-3. Import into Power BI Desktop and rename the source columns to the canonical names documented in `docs/data_dictionary.md`.
+3. Import into Power BI Desktop and use `power-query/LogiFlow_Staging.m`, which maps the verified raw source headers to canonical model fields.
 4. Create a Date table and relationships as documented in `docs/data_model.md`.
 5. Add measures from `dax/LogiFlow_Measures.dax`.
 6. Use `sql/logiflow_analysis.sql` for independent KPI checks after mapping source fields.
-7. Build the three report pages using `docs/report_blueprint.md` and the SVG mockups.
+7. Build the three report pages using `docs/report_blueprint.md`; treat the SVG files as layout references only.
 8. Validate all numbers against the raw data before publishing.
 
 ## Integrity notes
