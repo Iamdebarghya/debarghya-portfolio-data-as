@@ -166,3 +166,5 @@ Capture three screenshots after the PBIX is built:
 3. Same page after selecting a delivery mode while the region filter remains active.
 
 The screenshots must come from the running Power BI report, not SVG mockups or generated illustrations. Keep one screenshot of the Power Query steps and one of the DAX measure pane as build evidence. Do not fake changing numbers in a static image.
+
+- [Analyst storytelling & interview walkthrough](analyst_storytelling.md)
